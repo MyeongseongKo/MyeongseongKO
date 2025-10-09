@@ -1,77 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Myeongseong Ko | Economics Ph.D </title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Myeongseong Ko | Economics Ph.D</title>
 
-  <!-- ✅ Google 인증 태그 (바로 이 줄이 중요) -->
+  <!-- ✅ Google 인증 태그 -->
   <meta name="google-site-verification" content="5qvqDw8NW4IXz0nQoUXGbRK5eWCh47MjNl3OGc8BcpI" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- SEO Meta Tags -->
-  <meta name="title" content="Myeongseong Ko | Economics Ph.D. | International Trade & Global Value Chains">
-  <meta name="description" content="Myeongseong Ko is a Ph.D. student in Economics at Indiana University Bloomington. Research focus on International Trade, Global Value Chains, and FDI.">
-  <meta name="keywords" content="Myeongseong Ko, Economics PhD, International Trade, FDI, Global Value Chains, Indiana University Bloomington, PhD Student, Academic Research">
+  <meta name="title" content="Myeongseong Ko | Economics Ph.D | International Trade & Global Value Chains" />
+  <meta name="description" content="Myeongseong Ko is a Ph.D. student in Economics at Indiana University Bloomington. Research focus on International Trade, Global Value Chains, and FDI." />
+  <meta name="keywords" content="Myeongseong Ko, Economics PhD, International Trade, FDI, Global Value Chains, Indiana University Bloomington, PhD Student, Academic Research" />
 
   <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://myeongseongko.github.io/MyeongseongKO/">
-  <meta property="og:title" content="Myeongseong Ko | Economics Ph.D">
-  <meta property="og:description" content="Researching International Trade, Global Value Chains, and FDI. Based at Indiana University Bloomington.">
-  <meta property="og:image" content="https://myeongseongko.github.io/MyeongseongKO/globe.jpg">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://myeongseongko.github.io/MyeongseongKO/" />
+  <meta property="og:title" content="Myeongseong Ko | Economics Ph.D" />
+  <meta property="og:description" content="Researching International Trade, Global Value Chains, and FDI. Based at Indiana University Bloomington." />
+  <meta property="og:image" content="https://myeongseongko.github.io/MyeongseongKO/globe.jpg" />
 
   <style>
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-    
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Inter', sans-serif;
+      color: #333;
+      line-height: 1.6;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      right: 0;
-      background-color: #990000;
-      padding: 10px 20px;
-      border-bottom-left-radius: 10px;
-      z-index: 1000;
-    }
-
-    .navbar a {
+    .hero {
+      min-height: 100vh;
+      background: url('globe.jpg') center center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       color: white;
-      margin-left: 15px;
-      text-decoration: none;
-      font-size: 18px;
+      text-align: center;
+      overflow: hidden;
+      padding: 60px 40px 40px; /* 위/좌우 여백 */
+      animation: fadeIn 1.5s ease-in;
     }
-
-    .navbar a:hover {
-      text-decoration: underline;
-    }
-
-.hero {
-  height: 100vh;
-  background: url('globe.jpg') center center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-  overflow: hidden;
-  padding-top: 40px; /* ✅ 이 한 줄 추가 */
-}
 
     .hero-content {
       position: relative;
@@ -90,7 +73,8 @@ html, body {
 
     .hero h1 {
       font-size: 64px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+      margin-bottom: 10px;
     }
 
     .btn {
@@ -119,9 +103,12 @@ html, body {
       margin-right: 8px;
     }
 
-.content {
-  flex: 1; /* 본문이 남은 공간을 채움 */
-}
+    .content {
+      flex: 1;
+      padding: 0 40px; /* ✅ 좌우 여백 */
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
     section {
       margin-bottom: 50px;
@@ -142,22 +129,18 @@ html, body {
       color: #1a0dab;
     }
 
-footer {
-  background-color: #990000;
-  color: white;
-  text-align: right;
-  padding: 10px 20px;
-  font-size: 14px;
-  margin-top: 0; /* 불필요한 여백 제거 */
-}
-    
-    /* ---- 모바일 반응형 최적화 (아이폰, 안드로이드폰 공통) ---- */
+    footer {
+      background-color: #990000;
+      color: white;
+      text-align: right;
+      padding: 10px 20px;
+      font-size: 14px;
+      margin-top: 0;
+    }
+
     @media (max-width: 768px) {
       .hero {
-        min-height: 80vh;
-        padding-top: 80px;
-        padding-bottom: 80px;
-        background-position: center top;
+        padding: 80px 20px;
       }
 
       .profile-pic {
@@ -179,7 +162,7 @@ footer {
       }
 
       .content {
-        padding: 0 15px;
+        padding: 0 20px;
       }
 
       footer {
@@ -191,82 +174,74 @@ footer {
 </head>
 
 <body>
-
-<!-- Navbar -->
-<div class="navbar">
-  <a href="index.html">Home</a>
-</div>
-
-<!-- Hero Section -->
-<div class="hero" id="hero">
-  <div class="hero-content">
-    <img src="profile.jpg" alt="Myeongseong Ko" class="profile-pic">
-    <h1>Myeongseong Ko</h1>
-    <h3>Indiana University Bloomington</h3>
-    <h3>Department of Economics</h3>
-    <h4>100 South Woodlawn Avenue, Bloomington, IN 47405, United States</h4>
-    <h4>myeoko[at]iu[dot]edu</h4>
-    <a href="Curriculum_Vitae_MyeongseongKo_20240427.pdf" class="btn" download>
-      <i class="fas fa-file-download"></i> Download CV
-    </a>
+  <!-- Hero Section -->
+  <div class="hero" id="hero">
+    <div class="hero-content">
+      <img src="profile.jpg" alt="Myeongseong Ko" class="profile-pic" />
+      <h1>Myeongseong Ko</h1>
+      <h3>Indiana University Bloomington</h3>
+      <h3>Department of Economics</h3>
+      <h4>100 South Woodlawn Avenue, Bloomington, IN 47405, United States</h4>
+      <h4>myeoko[at]iu[dot]edu</h4>
+      <a href="Curriculum_Vitae_MyeongseongKo_20240427.pdf" class="btn" download>
+        <i class="fas fa-file-download"></i> Download CV
+      </a>
+    </div>
   </div>
-</div>
 
-<!-- Main Content -->
-<div class="content">
+  <!-- Main Content -->
+  <div class="content">
+    <section>
+      <h2>Research Interests</h2>
+      <ul>
+        <li>International Trade (Global Value Chains and Foreign Direct Investment)</li>
+        <li>International Law</li>
+      </ul>
+    </section>
 
-<section>
-<h2>Research Interests</h2>
-<ul>
-  <li>International Trade (Global Value Chains and Foreign Direct Investment)</li>
-  <li>International Law </li>
-</ul>
-</section>
+    <section>
+      <h2>Education</h2>
+      <ul>
+        <li>Indiana University Bloomington, Ph.D. Economics, Expected 2029</li>
+        <li>Seoul National University, M.A. Economics (Coursework Completed), 2025</li>
+        <li>University of Ulsan, B.A. Chinese Studies, 2019</li>
+      </ul>
+    </section>
 
-<section>
-<h2>Education</h2>
-<ul>
-  <li>Indiana University Bloomington, Ph.D. Economics, Expected 2029</li>
-  <li>Seoul National University, M.A. Economics (Coursework Completed), 2025</li>
-  <li>University of Ulsan, B.A. Chinese Studies, 2019</li>
-</ul>
-</section>
+    <section>
+      <h2>Research Experience</h2>
+      <ul>
+        <li>
+          Contributor, <em>International Trade and Commerce</em> (CR Books, 2024), Seoul National University Asia Center Project<br />
+          <small>(Co-authored selected sections under the supervision of Professor Hak-Kil Pyo.)</small>
+        </li>
+      </ul>
+    </section>
 
-<section>
-  <h2>Research Experience</h2>
-  <ul>
-    <li>Contributor, <em>International Trade and Commerce</em> (CR Books, 2024), Seoul National University Asia Center Project<br>
-      <small>(Co-authored selected sections under the supervision of Professor Hak-Kil Pyo.)</small>
-    </li>
-  </ul>
-</section>
-  
-<section>
-<h2>Other Experience</h2>
-<ul>
-  <li>Administrative Secretary, Korea Association of Trade and Industry Studies (KATIS) (2024)</li>
-  <li>Intelligence Officer, Department of National Defense, South Korea (2020-2022)<br>
-  </li>
-</ul>
-</section>
-  
-<section>
-  <h2>Work in Progress</h2>
-  <ul>
-    <li><strong>The Elasticity of Domestic Logistics to Road Network Connectivity</strong></li>
-  </ul>
-</section>
-  
-<!-- Footer -->
-<footer>
-  Copyright © <span id="year"></span> Myeongseong Ko
-</footer>
+    <section>
+      <h2>Other Experience</h2>
+      <ul>
+        <li>Administrative Secretary, Korea Association of Trade and Industry Studies (KATIS) (2024)</li>
+        <li>Intelligence Officer, Department of National Defense, South Korea (2020–2022)</li>
+      </ul>
+    </section>
 
-<!-- Footer Script -->
-<script>
-// Footer 연도 자동 업데이트
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    <section>
+      <h2>Work in Progress</h2>
+      <ul>
+        <li><strong>The Elasticity of Domestic Logistics to Road Network Connectivity</strong></li>
+      </ul>
+    </section>
+  </div>
 
+  <!-- Footer -->
+  <footer>
+    Copyright © <span id="year"></span> Myeongseong Ko
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
