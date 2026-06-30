@@ -3,27 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Myeongseong Ko </title>
+  <title>Myeongseong Ko</title>
 
-  <!-- ✅ Google 인증 태그 -->
   <meta name="google-site-verification" content="5qvqDw8NW4IXz0nQoUXGbRK5eWCh47MjNl3OGc8BcpI" />
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- SEO Meta Tags -->
   <meta name="title" content="Myeongseong Ko" />
-  <meta name="description" content="Myeongseong Ko is a Ph.D. student in Economics at Indiana University Bloomington. Research focus on International Trade and Logistics." />
-  <meta name="keywords" content="Myeongseong Ko, Economics PhD, International Trade, FDI, Global Value Chains, Logistics, Network Theory, Chinese Studies, Indiana University Bloomington, PhD Student, Academic Research" />
+  <meta name="description" content="Myeongseong Ko is a Ph.D. student in Economics at Indiana University Bloomington. His research interests include International Trade, International Law, and Economic History." />
+  <meta name="keywords" content="Myeongseong Ko, Indiana University Bloomington, Economics, International Trade, International Law, Economic History, Tributary System, PhD Student" />
 
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://myeongseongko.github.io/MyeongseongKO/" />
   <meta property="og:title" content="Myeongseong Ko" />
-  <meta property="og:description" content="Myeongseong Ko is a Ph.D. student in Economics at Indiana University Bloomington. Research focus on International Trade and Logistics." />
+  <meta property="og:description" content="Ph.D. student in Economics at Indiana University Bloomington." />
   <meta property="og:image" content="https://myeongseongko.github.io/MyeongseongKO/globe.jpg" />
 
   <style>
@@ -51,14 +45,8 @@
       align-items: center;
       color: white;
       text-align: center;
-      overflow: hidden;
-      padding: 60px 40px 40px; /* 위/좌우 여백 */
+      padding: 60px 40px 40px;
       animation: fadeIn 1.5s ease-in;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
     }
 
     .profile-pic {
@@ -67,181 +55,230 @@
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid white;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
     }
 
     .hero h1 {
       font-size: 64px;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
       margin-bottom: 10px;
     }
 
     .btn {
       display: inline-block;
-      background-color: #990000;
-      color: white;
-      padding: 12px 24px;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      text-decoration: none;
-      margin-top: 20px;
-      transition: background-color 0.3s ease, transform 0.1s ease;
+      background:#990000;
+      color:white;
+      padding:12px 24px;
+      border-radius:5px;
+      text-decoration:none;
+      font-weight:bold;
+      margin-top:20px;
     }
 
-    .btn:hover {
-      background-color: #770000;
+    .btn:hover{
+      background:#770000;
     }
 
-    .btn:active {
-      transform: scale(0.95);
+    .content{
+      max-width:1100px;
+      margin:auto;
+      padding:40px;
     }
 
-    .btn i {
-      margin-right: 8px;
+    section{
+      margin-bottom:50px;
     }
 
-    .content {
-      flex: 1;
-      padding: 0 40px; /* ✅ 좌우 여백 */
-      max-width: 1200px;
-      margin: 0 auto;
+    h2{
+      border-bottom:2px solid #ccc;
+      padding-bottom:5px;
     }
 
-    section {
-      margin-bottom: 50px;
+    footer{
+      background:#990000;
+      color:white;
+      text-align:right;
+      padding:10px 20px;
     }
 
-    h2 {
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 5px;
-      margin-bottom: 15px;
-    }
+    @media(max-width:768px){
 
-    ul {
-      padding-left: 20px;
-    }
-
-    a {
-      text-decoration: none;
-      color: #1a0dab;
-    }
-
-    footer {
-      background-color: #990000;
-      color: white;
-      text-align: right;
-      padding: 10px 20px;
-      font-size: 14px;
-      margin-top: 0;
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding: 80px 20px;
+      .hero{
+        padding:80px 20px;
       }
 
-      .profile-pic {
-        width: 120px;
-        height: 120px;
+      .hero h1{
+        font-size:36px;
       }
 
-      .hero h1 {
-        font-size: 36px;
+      .profile-pic{
+        width:120px;
+        height:120px;
       }
 
-      .hero h3, .hero h4 {
-        font-size: 16px;
+      .content{
+        padding:20px;
       }
 
-      .btn {
-        padding: 10px 20px;
-        font-size: 16px;
+      footer{
+        text-align:center;
       }
 
-      .content {
-        padding: 0 20px;
-      }
-
-      footer {
-        text-align: center;
-        font-size: 12px;
-      }
     }
+
   </style>
+
 </head>
 
 <body>
-  <!-- Hero Section -->
-  <div class="hero" id="hero">
-    <div class="hero-content">
-      <img src="profile.jpg" alt="Myeongseong Ko" class="profile-pic" />
-      <h1>Myeongseong Ko</h1>
-      <h3>Indiana University Bloomington</h3>
-      <h3>Department of Economics</h3>
-      <h4>100 South Woodlawn Avenue, Bloomington, IN 47405, United States</h4>
-      <h4>myeoko[at]iu[dot]edu</h4>
-      <a href="CV_MyeongseongKO_20251008.pdf" class="btn" download>
-        <i class="fas fa-file-download"></i> Download CV
-      </a>
-    </div>
-  </div>
 
-  <!-- Main Content -->
-  <div class="content">
-    <section>
-      <h2>Research Interests</h2>
-      <ul>
-        <li>International Trade</li>
-        <li>International Law</li>
-        <li>Logistics</li>
-      </ul>
-    </section>
+<div class="hero">
 
-    <section>
-      <h2>Education</h2>
-      <ul>
-        <li>Indiana University Bloomington, Ph.D. in Economics — ongoing (Expected 2029)</li>
-        <li>Seoul National University, M.A. in Economics (Coursework Completed), 2024</li>
-        <li>University of Ulsan, B.A. in Chinese Language and Area Studies, 2019</li>
-      </ul>
-    </section>
+<img src="profile.jpg" class="profile-pic">
 
-    <section>
-      <h2>Research Experience</h2>
-      <ul>
-        <li>
-          Contributor, <em>International Trade and Commerce</em> (CR Books, 2024), Seoul National University Asia Center Project<br />
-        </li>
-      </ul>
-    </section>
+<h1>Myeongseong Ko</h1>
 
-    <section>
-      <h2>Other Experience</h2>
-      <ul>
-        <li>Administrative Secretary, Korea Association of Trade and Industry Studies (KATIS) (2024)</li>
-        <li>Intelligence Officer, Department of National Defense, South Korea (2019–2021)</li>
-      </ul>
-    </section>
+<h3>Indiana University Bloomington</h3>
 
-    <section>
-      <h2>Work in Progress</h2>
-      <ul>
-<li><strong>The Elasticity of Domestic Logistics to Road Network Connectivity</strong> (with Professor Youngsik Kim, Seoul National University)</li>
-      </ul>
-    </section>
-  </div>
+<h3>Department of Economics</h3>
 
-  <!-- Footer -->
-  <footer>
-    Copyright © <span id="year"></span> Myeongseong Ko
-  </footer>
+<h4>100 South Woodlawn Avenue, Bloomington, IN 47405</h4>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<h4>myeoko[at]iu[dot]edu</h4>
+
+<a href="CV_MyeongseongKO_20260630.pdf" class="btn" download>
+<i class="fas fa-file-download"></i> Download CV
+</a>
+
+</div>
+
+<div class="content">
+
+<section>
+
+<h2>Research Interests</h2>
+
+<ul>
+<li>International Trade</li>
+<li>International Law</li>
+<li>Economic History</li>
+</ul>
+
+</section>
+
+<section>
+
+<h2>Education</h2>
+
+<ul>
+
+<li><strong>Indiana University Bloomington</strong><br>
+Ph.D. in Economics (2025–Present)</li>
+
+<li><strong>Seoul National University</strong><br>
+M.A. Program in Economics (Coursework Completed, 2022–2024)</li>
+
+<li><strong>University of Ulsan</strong><br>
+B.A. in Chinese Language and Area Studies<br>
+Double Major in Economics<br>
+<em>Summa Cum Laude</em></li>
+
+</ul>
+
+</section>
+
+<section>
+
+<h2>Research in Progress</h2>
+
+<ul>
+
+<li>
+
+<strong>How Was Trade Cooperation Sustained before Modern International Law?</strong><br>
+
+<em>Evidence from the East Asian Tributary System</em>
+
+</li>
+
+</ul>
+
+</section>
+
+<section>
+
+<h2>Teaching Experience</h2>
+
+<ul>
+
+<li>
+Associate Instructor, Graduate Microeconomics<br>
+Indiana University Bloomington (Fall 2026)
+</li>
+
+<li>
+Teaching Assistant, Mathematics Camp for Incoming Graduate Students<br>
+Indiana University Bloomington (Summer 2026)
+</li>
+
+</ul>
+
+</section>
+
+<section>
+
+<h2>Professional Experience</h2>
+
+<ul>
+
+<li>
+Contributor, <em>International Trade and Commerce</em> (CR Books, 2024)<br>
+Seoul National University Asia Center
+</li>
+
+<li>
+Administrative Secretary<br>
+Korea Association of Trade and Industry Studies (KATIS), 2024
+</li>
+
+<li>
+Military Officer (Intelligence)<br>
+Ministry of National Defense, Republic of Korea
+</li>
+
+</ul>
+
+</section>
+
+<section>
+
+<h2>Awards and Honors</h2>
+
+<ul>
+
+<li>Best First-Year Student Award, Indiana University Bloomington (2026)</li>
+
+<li>Brain Korea 21 Fellowship (2023–2024)</li>
+
+<li>Kwanjeong Educational Foundation Fellowship (2017–2018)</li>
+
+</ul>
+
+</section>
+
+</div>
+
+<footer>
+
+Copyright © <span id="year"></span> Myeongseong Ko
+
+</footer>
+
+<script>
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+</script>
+
 </body>
 </html>
-
