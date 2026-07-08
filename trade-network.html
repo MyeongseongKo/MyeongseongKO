@@ -196,17 +196,15 @@ button.active {
         background: #d8edf8;
     }
 
-    #main {
-        position: absolute !important;
-        top: 104px;
-        left: 0;
-        right: 0;
-        bottom: 132px;
-        width: 100% !important;
-        height: auto !important;
-        background: #d8edf8;
-    }
-
+#main {
+    position: absolute !important;
+    top: 120px;
+    left: 0;
+    right: 0;
+    bottom: 135px;
+    width: 100% !important;
+    background: #d8edf8;
+}
     #map {
         width: 100% !important;
         height: 100% !important;
@@ -526,11 +524,11 @@ const isMobile = window.innerWidth <= 768;
 
 if (isMobile) {
     map.fitBounds([
-        [26.0, 116.5],
-        [45.5, 144.5]
+        [28.5, 116.8],
+        [44.5, 141.5]
     ], {
-        paddingTopLeft: [10, 95],
-        paddingBottomRight: [10, 145]
+        paddingTopLeft: [0, 20],
+        paddingBottomRight: [0, 90]
     });
 } else {
     map.fitBounds([
