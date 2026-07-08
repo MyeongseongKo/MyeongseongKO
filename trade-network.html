@@ -232,10 +232,8 @@ const map = L.map("map", {
     boxZoom: false,
     keyboard: false,
     touchZoom: false,
-    attributionControl: false,
-    minZoom: 5,
-    maxZoom: 8
-}).setView([36.8, 127.3], 5);
+    attributionControl: false
+});
     
 Promise.all([
     fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
@@ -298,7 +296,14 @@ Promise.all([
 
     });
 
-    drawMap();
+   drawMap();
+
+map.fitBounds([
+    [24.5, 118.0],   // 남서쪽
+    [45.5, 145.5]    // 북동쪽
+], {
+    padding: [10,10]
+});
 
 });
 
