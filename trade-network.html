@@ -192,7 +192,6 @@ button.active {
         width: 100%;
         height: 100dvh !important;
         overflow: hidden !important;
-        position: relative;
         background: #d8edf8;
     }
 
@@ -201,18 +200,16 @@ button.active {
         top: 0;
         left: 0;
         right: 0;
-
+        height: 210px !important;
         width: 100% !important;
-        height: 145px !important;
-        padding: 34px 16px 12px 16px !important;
+
+        padding: 70px 16px 12px 16px !important;
+        box-sizing: border-box;
 
         background: rgba(255,255,255,0.98) !important;
         border: none !important;
         border-bottom: 1px solid #ddd !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-
         z-index: 1000;
-        box-sizing: border-box;
     }
 
     #sidebar h1 {
@@ -224,7 +221,7 @@ button.active {
     #subtitle {
         margin: 8px 0 0 0 !important;
         font-size: 16px !important;
-        line-height: 1.2 !important;
+        line-height: 1.18 !important;
     }
 
     .section-title,
@@ -235,11 +232,10 @@ button.active {
 
     #main {
         position: fixed !important;
-        top: 145px !important;
+        top: 210px !important;
         left: 0;
         right: 0;
-        bottom: 240px !important;
-        width: 100% !important;
+        bottom: 180px !important;
         background: #d8edf8;
         z-index: 1;
     }
@@ -250,29 +246,22 @@ button.active {
         background: #d8edf8;
     }
 
-    #sidebar::before {
-        content: "";
-        position: fixed;
-        left: 10px;
-        right: 10px;
-        bottom: 72px;
-        height: 150px;
-
-        background: rgba(255,255,255,0.94);
-        border-radius: 14px;
-        box-shadow: 0 -2px 14px rgba(0,0,0,0.12);
-        z-index: 1001;
-    }
-
     #sidebar::after {
         content: "Period";
         position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 190px;
+        left: 18px;
+        bottom: 113px;
+        font-size: 15px;
+        font-weight: 700;
+        z-index: 1002;
+    }
 
-        text-align: center;
-        font-size: 13px;
+    #sidebar::before {
+        content: "Network";
+        position: fixed;
+        left: 18px;
+        bottom: 43px;
+        font-size: 15px;
         font-weight: 700;
         z-index: 1002;
     }
@@ -280,74 +269,46 @@ button.active {
     #p1, #p2, #p3,
     #v1, #v2, #v3 {
         position: fixed !important;
+        width: calc((100vw - 118px) / 3) !important;
+        height: 54px !important;
+
         margin: 0 !important;
+        padding: 6px 4px !important;
+        box-sizing: border-box !important;
 
-        height: 42px !important;
-        padding: 6px 5px !important;
-
-        font-size: 11.5px !important;
+        font-size: 12px !important;
         line-height: 1.08 !important;
-        font-weight: 700;
-        text-align: center;
+        font-weight: 700 !important;
+        text-align: center !important;
 
-        border-radius: 9px !important;
+        border-radius: 10px !important;
         border: 1px solid rgba(0,0,0,0.25) !important;
-        background: rgba(255,255,255,0.98) !important;
+        background: rgba(255,255,255,0.96) !important;
         color: #2f80ed !important;
 
-        box-shadow: none !important;
         z-index: 1002;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+        transform: none !important;
     }
 
-    #p1 {
-        left: 18px !important;
-        width: calc((100% - 52px) / 3) !important;
-        bottom: 145px !important;
+    #p1, #v1 {
+        left: 92px !important;
     }
 
-    #p2 {
-        left: calc(26px + ((100% - 52px) / 3)) !important;
-        width: calc((100% - 52px) / 3) !important;
-        bottom: 145px !important;
+    #p2, #v2 {
+        left: calc(92px + ((100vw - 118px) / 3) + 8px) !important;
     }
 
-    #p3 {
-        right: 18px !important;
-        width: calc((100% - 52px) / 3) !important;
-        bottom: 145px !important;
+    #p3, #v3 {
+        right: 14px !important;
     }
 
-    #v1 {
-        left: 18px !important;
-        right: 18px !important;
-        width: auto !important;
-        bottom: 84px !important;
+    #p1, #p2, #p3 {
+        bottom: 92px !important;
     }
 
-    #v2 {
-        left: 18px !important;
-        width: calc((100% - 44px) / 2) !important;
-        bottom: 32px !important;
-    }
-
-    #v3 {
-        right: 18px !important;
-        width: calc((100% - 44px) / 2) !important;
-        bottom: 32px !important;
-    }
-
-    #v1::before {
-        content: "Network";
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 116px;
-
-        color: black;
-        text-align: center;
-        font-size: 13px;
-        font-weight: 700;
-        z-index: 1002;
+    #v1, #v2, #v3 {
+        bottom: 22px !important;
     }
 
     #p1.active, #p2.active, #p3.active,
