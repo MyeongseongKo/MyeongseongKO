@@ -251,7 +251,6 @@ const map = L.map("map", {
     maxZoom: 8
 }).setView([36.8, 126.2], 5);
 
-```html
 Promise.all([
     fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
     fetch("ne_land_eastasia.geojson").then(r => r.json()),
@@ -533,4 +532,3 @@ function setView(view){
 
 </body>
 </html>
-```
