@@ -13,79 +13,59 @@
 <style>
 
 html, body{
-    height:100%;
     margin:0;
-    display:flex;
-    flex-direction:column;
     font-family:'Inter',sans-serif;
     color:#333;
     line-height:1.6;
+    background:#fff;
 }
 
-/* Navigation Bar */
+/* Navigation */
 
 .navbar{
-    position:absolute;
-    top:25px;
-    right:35px;
     display:flex;
-    gap:12px;
-    z-index:1000;
+    justify-content:flex-end;
+    gap:15px;
+    padding:25px 40px;
+    border-bottom:2px solid #ddd;
 }
 
 .navbar a{
-    color:white;
-    background:rgba(153,0,0,0.85);
-    padding:8px 14px;
-    border-radius:5px;
+    color:#990000;
     text-decoration:none;
     font-weight:700;
-    transition:0.2s;
 }
 
 .navbar a:hover{
-    background:#770000;
-}
-
-/* Page Header */
-
-.page-header{
-    background:#990000;
-    color:white;
-    padding:90px 40px 60px;
-    text-align:center;
-}
-
-.page-header h1{
-    font-size:48px;
-    margin:0;
-}
-
-.page-header p{
-    margin-top:10px;
-    font-size:18px;
+    color:#770000;
 }
 
 /* Content */
 
 .content{
-    max-width:1100px;
-    margin:auto;
-    padding:40px;
-    flex:1;
+    max-width:1000px;
+    margin:50px auto;
+    padding:0 30px;
 }
 
-section{
+h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#666;
     margin-bottom:50px;
 }
 
 h2{
     border-bottom:2px solid #ccc;
-    padding-bottom:5px;
+    padding-bottom:8px;
+    margin-top:45px;
 }
 
 .course-box{
-    background:#f8f8f8;
+    background:#fafafa;
     border-left:5px solid #990000;
     padding:20px 25px;
     border-radius:6px;
@@ -94,6 +74,10 @@ h2{
 
 .course-box h3{
     margin-top:0;
+}
+
+.materials-list{
+    margin-top:15px;
 }
 
 .materials-list li{
@@ -111,10 +95,11 @@ a:hover{
 /* Footer */
 
 footer{
-    background:#990000;
-    color:white;
+    margin-top:70px;
+    border-top:2px solid #ddd;
     text-align:right;
-    padding:10px 20px;
+    padding:20px 40px;
+    color:#777;
 }
 
 /* Mobile */
@@ -122,22 +107,17 @@ footer{
 @media(max-width:768px){
 
     .navbar{
-        top:18px;
-        right:20px;
-        gap:10px;
-        font-size:15px;
-    }
-
-    .page-header{
-        padding:85px 20px 50px;
-    }
-
-    .page-header h1{
-        font-size:36px;
+        justify-content:center;
+        padding:18px;
     }
 
     .content{
-        padding:25px;
+        margin:30px auto;
+        padding:20px;
+    }
+
+    h1{
+        font-size:36px;
     }
 
     footer{
@@ -153,58 +133,73 @@ footer{
 <body>
 
 <nav class="navbar">
-    <a href="index.html">Home</a>
-    <a href="research.html">Research</a>
-</nav>
 
-<div class="page-header">
-    <h1>Teaching</h1>
-    <p>Teaching materials and course information</p>
-</div>
+<a href="index.html">Home</a>
+
+<a href="research.html">Research</a>
+
+</nav>
 
 <div class="content">
 
+<h1>Teaching</h1>
+
+<p class="subtitle">
+Teaching materials and supplementary resources.
+</p>
+
 <section>
 
-<h2>Courses</h2>
+<h2>Mathematics Camp for Incoming Graduate Students</h2>
 
 <div class="course-box">
 
-<h3>Mathematics Camp for Incoming Graduate Students</h3>
+<h3>Indiana University Bloomington</h3>
 
 <p>
-<strong>Indiana University Bloomington</strong><br>
 Department of Economics<br>
 Summer 2026
 </p>
 
-<p>
-Materials for Mathematics Camp will be posted here.
-</p>
-
 <ul class="materials-list">
-    <li><a href="#">Syllabus</a> <em>(coming soon)</em></li>
-    <li><a href="#">Lecture Notes</a> <em>(coming soon)</em></li>
-    <li><a href="#">Problem Sets</a> <em>(coming soon)</em></li>
-    <li><a href="#">Solutions</a> <em>(coming soon)</em></li>
-    <li><a href="#">Python / MATLAB Code</a> <em>(coming soon)</em></li>
+
+<li><a href="#">Syllabus</a> <em>(coming soon)</em></li>
+
+<li><a href="#">Lecture Notes</a> <em>(coming soon)</em></li>
+
+<li><a href="#">Slides</a> <em>(coming soon)</em></li>
+
+<li><a href="#">Problem Sets</a> <em>(coming soon)</em></li>
+
+<li><a href="#">Solutions</a> <em>(coming soon)</em></li>
+
+<li><a href="#">Python / MATLAB Code</a> <em>(coming soon)</em></li>
+
 </ul>
 
 </div>
 
+</section>
+
+<section>
+
+<h2>Supplementary Materials</h2>
+
 <div class="course-box">
 
-<h3>Graduate Microeconomics</h3>
+<ul class="materials-list">
 
-<p>
-<strong>Indiana University Bloomington</strong><br>
-Department of Economics<br>
-Fall 2026
-</p>
+<li><a href="#">Linear Algebra Review</a></li>
 
-<p>
-Course-related information may be posted here.
-</p>
+<li><a href="#">Optimization Review</a></li>
+
+<li><a href="#">Matrix Calculus</a></li>
+
+<li><a href="#">Probability Review</a></li>
+
+<li><a href="#">Python Tutorial</a></li>
+
+</ul>
 
 </div>
 
@@ -220,14 +215,9 @@ Copyright © <span id="year"></span> Myeongseong Ko
 
 <script>
 
-document.getElementById("year").textContent=new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
 
 </script>
-
-</body>
-
-</html>
-<p><a href="index.html">← Back to Home</a></p>
 
 </body>
 
