@@ -1,0 +1,274 @@
+[
+  {
+    "period":"世宗",
+    "partner":"女眞\/野人",
+    "flow":"export",
+    "records":53,
+    "quantity_sum":15057,
+    "items":"厚紙, 弓, 段子, 牛, 綿布, 緜布, 馬, 鹿皮, 麻布"
+  },
+  {
+    "period":"世宗",
+    "partner":"女眞\/野人",
+    "flow":"import",
+    "records":3,
+    "quantity_sum":38,
+    "items":"段子, 綿布, 緜布, 馬"
+  },
+  {
+    "period":"世宗",
+    "partner":"女眞\/野人",
+    "flow":"unknown",
+    "records":16,
+    "quantity_sum":12984,
+    "items":"段子, 牛, 綿布, 馬"
+  },
+  {
+    "period":"世宗",
+    "partner":"對馬",
+    "flow":"export",
+    "records":17,
+    "quantity_sum":9444,
+    "items":"人蔘, 松子, 段子, 白磻, 硫黃, 紬布, 綿布, 緜布, 苧布, 藿香, 蘇木, 虎皮, 豹皮, 金襴, 銅, 馬, 麻布"
+  },
+  {
+    "period":"世宗",
+    "partner":"對馬",
+    "flow":"import",
+    "records":15,
+    "quantity_sum":19638,
+    "items":"丹木, 川芎, 沈香, 硫黃, 緜布, 胡椒, 藿香, 蘇木, 銅, 馬"
+  },
+  {
+    "period":"世宗",
+    "partner":"對馬",
+    "flow":"unknown",
+    "records":11,
+    "quantity_sum":1228,
+    "items":"丹木, 人蔘, 松子, 緜布, 胡椒, 苧布, 虎皮, 豹皮, 銅, 麻布"
+  },
+  {
+    "period":"世宗",
+    "partner":"日本\/倭",
+    "flow":"export",
+    "records":39,
+    "quantity_sum":61389,
+    "items":"丹木, 人蔘, 川芎, 松子, 牛, 硫黃, 紬布, 綿布, 緜布, 胡椒, 苧布, 藿香, 蘇木, 虎皮, 豹皮, 銅, 鞍子, 馬, 麻布, 黑麻布"
+  },
+  {
+    "period":"世宗",
+    "partner":"日本\/倭",
+    "flow":"import",
+    "records":21,
+    "quantity_sum":59292,
+    "items":"丹木, 川芎, 段子, 沈香, 深黃, 白磻, 白蠟, 硫黃, 肉桂, 胡椒, 藿香, 蘇木, 金襴, 銅, 鐵, 鞍子, 馬"
+  },
+  {
+    "period":"世宗",
+    "partner":"日本\/倭",
+    "flow":"unknown",
+    "records":6,
+    "quantity_sum":30027,
+    "items":"丹木, 人蔘, 沈香, 胡椒, 藿香, 銀, 銅, 銅鐵, 鐵"
+  },
+  {
+    "period":"世宗",
+    "partner":"明\/遼東",
+    "flow":"export",
+    "records":50,
+    "quantity_sum":79832,
+    "items":"人蔘, 厚紙, 段子, 牛, 硫黃, 紬布, 綿布, 緜布, 苧布, 蘇木, 豹皮, 銀, 銅, 馬, 鹿皮, 麻布"
+  },
+  {
+    "period":"世宗",
+    "partner":"明\/遼東",
+    "flow":"import",
+    "records":17,
+    "quantity_sum":43685,
+    "items":"丹木, 人蔘, 沈香, 牛, 硫黃, 緜布, 胡椒, 苧布, 銅, 馬, 麻布"
+  },
+  {
+    "period":"世宗",
+    "partner":"明\/遼東",
+    "flow":"unknown",
+    "records":81,
+    "quantity_sum":185539,
+    "items":"人蔘, 松子, 沈香, 牛, 綿布, 緜布, 苧布, 金襴, 銀, 鐵, 馬, 麻布"
+  },
+  {
+    "period":"世宗",
+    "partner":"琉球",
+    "flow":"export",
+    "records":3,
+    "quantity_sum":461,
+    "items":"段子, 白紵布, 紬布, 綿布, 緜布, 胡椒, 黑麻布"
+  },
+  {
+    "period":"世宗",
+    "partner":"琉球",
+    "flow":"import",
+    "records":1,
+    "quantity_sum":1168,
+    "items":"丹木, 川芎, 段子, 沈香, 深黃, 白磻, 藿香, 金襴, 靑磁器, 靑磁花甁"
+  },
+  {
+    "period":"世宗",
+    "partner":"琉球",
+    "flow":"unknown",
+    "records":2,
+    "quantity_sum":7056,
+    "items":"鐵, 麻布"
+  },
+  {
+    "period":"太宗",
+    "partner":"女眞\/野人",
+    "flow":"export",
+    "records":4,
+    "quantity_sum":1099,
+    "items":"綿布, 苧布, 馬, 黑麻布"
+  },
+  {
+    "period":"太宗",
+    "partner":"女眞\/野人",
+    "flow":"import",
+    "records":1,
+    "quantity_sum":14,
+    "items":"馬"
+  },
+  {
+    "period":"太宗",
+    "partner":"女眞\/野人",
+    "flow":"unknown",
+    "records":6,
+    "quantity_sum":471,
+    "items":"牛, 馬"
+  },
+  {
+    "period":"太宗",
+    "partner":"對馬",
+    "flow":"export",
+    "records":2,
+    "quantity_sum":600,
+    "items":"松子, 銅鐵"
+  },
+  {
+    "period":"太宗",
+    "partner":"對馬",
+    "flow":"import",
+    "records":6,
+    "quantity_sum":51,
+    "items":"人蔘, 苧布, 馬, 黑麻布"
+  },
+  {
+    "period":"太宗",
+    "partner":"日本\/倭",
+    "flow":"export",
+    "records":8,
+    "quantity_sum":158,
+    "items":"松子, 苧布, 豹皮, 馬, 麻布"
+  },
+  {
+    "period":"太宗",
+    "partner":"日本\/倭",
+    "flow":"import",
+    "records":6,
+    "quantity_sum":166,
+    "items":"人蔘, 蘇木, 馬, 黑麻布"
+  },
+  {
+    "period":"太宗",
+    "partner":"日本\/倭",
+    "flow":"unknown",
+    "records":3,
+    "quantity_sum":2603,
+    "items":"人蔘, 松子, 銅, 馬"
+  },
+  {
+    "period":"太宗",
+    "partner":"明\/遼東",
+    "flow":"export",
+    "records":12,
+    "quantity_sum":63736,
+    "items":"牛, 綿布, 緜布, 苧布, 銀, 馬, 鹿皮"
+  },
+  {
+    "period":"太宗",
+    "partner":"明\/遼東",
+    "flow":"import",
+    "records":7,
+    "quantity_sum":65322,
+    "items":"牛, 鞍子, 馬, 麻布"
+  },
+  {
+    "period":"太宗",
+    "partner":"明\/遼東",
+    "flow":"unknown",
+    "records":51,
+    "quantity_sum":39045,
+    "items":"弓, 段子, 牛, 銀, 鐵, 馬, 麻布"
+  },
+  {
+    "period":"太祖-定宗",
+    "partner":"對馬",
+    "flow":"export",
+    "records":1,
+    "quantity_sum":7,
+    "items":"苧布, 虎皮, 黑麻布"
+  },
+  {
+    "period":"太祖-定宗",
+    "partner":"對馬",
+    "flow":"import",
+    "records":4,
+    "quantity_sum":44,
+    "items":"馬"
+  },
+  {
+    "period":"太祖-定宗",
+    "partner":"日本\/倭",
+    "flow":"export",
+    "records":1,
+    "quantity_sum":1,
+    "items":"馬"
+  },
+  {
+    "period":"太祖-定宗",
+    "partner":"日本\/倭",
+    "flow":"import",
+    "records":1,
+    "quantity_sum":2,
+    "items":"馬"
+  },
+  {
+    "period":"太祖-定宗",
+    "partner":"日本\/倭",
+    "flow":"unknown",
+    "records":1,
+    "quantity_sum":1,
+    "items":"馬"
+  },
+  {
+    "period":"太祖-定宗",
+    "partner":"明\/遼東",
+    "flow":"export",
+    "records":2,
+    "quantity_sum":39521,
+    "items":"緜布, 馬"
+  },
+  {
+    "period":"太祖-定宗",
+    "partner":"明\/遼東",
+    "flow":"import",
+    "records":7,
+    "quantity_sum":4530,
+    "items":"馬"
+  },
+  {
+    "period":"太祖-定宗",
+    "partner":"明\/遼東",
+    "flow":"unknown",
+    "records":3,
+    "quantity_sum":2000,
+    "items":"馬"
+  }
+]
