@@ -8,83 +8,147 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
-body { margin:0; font-family:Arial, sans-serif; }
-#container { display:flex; height:100vh; overflow:hidden; }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
 
 #sidebar {
-    width:265px;
-    padding:20px;
-    background:#f7f7f7;
-    border-right:1px solid #ddd;
-    box-sizing:border-box;
+    width: 265px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 #sidebar h1 {
-    font-size:22px;
-    margin-top:0;
-    line-height:1.2;
+    font-size: 22px;
+    margin-top: 0;
+    line-height: 1.2;
 }
 
 #subtitle {
-    font-size:14px;
-    color:#333;
-    margin-bottom:22px;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 22px;
 }
 
 .section-title {
-    margin-top:20px;
-    margin-bottom:8px;
-    font-weight:bold;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
 
 button {
-    display:block;
-    width:100%;
-    margin:8px 0;
-    padding:10px 12px;
-    font-size:15px;
-    cursor:pointer;
-    border:1px solid #aaa;
-    border-radius:6px;
-    background:white;
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px 12px;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    background: white;
 }
 
 button.active {
-    background:#1f4e79;
-    color:white;
+    background: #1f4e79;
+    color: white;
 }
 
 .note {
-    margin-top:22px;
-    font-size:12.5px;
-    color:#555;
-    line-height:1.5;
+    margin-top: 22px;
+    font-size: 12.5px;
+    color: #555;
+    line-height: 1.5;
 }
 
 #main {
-    flex:1;
-    background:#d9d9d9;
-    padding:8px;
-    box-sizing:border-box;
+    flex: 1;
+    background: #d9d9d9;
+    padding: 8px;
+    box-sizing: border-box;
+    position: relative;
 }
 
 #map {
-    width:100%;
-    height:calc(100vh - 16px);
-    background:#d8edf8;
-    border:1px solid #cfcfcf;
-    box-shadow:0 5px 18px rgba(0,0,0,0.12);
+    width: 100%;
+    height: calc(100vh - 16px);
+    background: #d8edf8;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
 }
 
 .leaflet-tooltip {
-    font-size:13px;
-    font-weight:600;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .leaflet-tooltip.edge-tooltip {
-    font-weight:normal;
-    font-size:13px;
-    line-height:1.4;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.historical-label {
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.45);
+    text-shadow: 1px 1px 3px white;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+#legend {
+    position: absolute;
+    right: 26px;
+    bottom: 26px;
+    background: rgba(255,255,255,0.93);
+    padding: 14px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    font-size: 13px;
+    line-height: 1.5;
+    z-index: 999;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.dot.joseon {
+    background: #1f4e79;
+}
+
+.dot.partner {
+    background: #666;
+}
+
+.line {
+    display: inline-block;
+    width: 42px;
+    background: #1f4e79;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.line.thick {
+    height: 7px;
+}
+
+.line.thin {
+    height: 2px;
 }
 </style>
 </head>
@@ -125,6 +189,14 @@ button.active {
 
 <div id="main">
     <div id="map"></div>
+
+    <div id="legend">
+        <b>Legend</b><br><br>
+        <span class="dot joseon"></span> Joseon<br>
+        <span class="dot partner"></span> Trade partner<br><br>
+        <span class="line thick"></span> Many trade records<br>
+        <span class="line thin"></span> Few trade records
+    </div>
 </div>
 
 </div>
@@ -136,6 +208,7 @@ let currentPeriod = "太祖-定宗";
 let currentView = "overall";
 let tradeData = [];
 let layerGroup;
+let labelGroup;
 
 const coords = {
     "朝鮮": [37.57, 126.98],
@@ -155,25 +228,30 @@ const labels = {
     "琉球": "Ryukyu"
 };
 
+const historicalLabels = [
+    { name: "北元 / 蒙古", lat: 45.2, lon: 120.2 },
+    { name: "明", lat: 36.4, lon: 119.0 },
+    { name: "朝鮮", lat: 37.9, lon: 128.0 },
+    { name: "女眞", lat: 42.7, lon: 131.0 },
+    { name: "日本", lat: 35.4, lon: 137.2 },
+    { name: "對馬", lat: 34.1, lon: 129.5 },
+    { name: "琉球", lat: 26.0, lon: 127.8 }
+];
+
 const map = L.map("map", {
-    zoomControl: true,
-    dragging: true,
-    scrollWheelZoom: true,
-    doubleClickZoom: true,
-    boxZoom: true,
-    keyboard: true,
-    touchZoom: true,
+    zoomControl: false,
+    dragging: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    touchZoom: false,
     attributionControl: false,
     minZoom: 5,
-    maxZoom: 8,
-    maxBoundsViscosity: 1.0
+    maxZoom: 8
 }).setView([36.8, 126.2], 5);
 
-map.setMaxBounds([
-    [24.0, 122.0],
-    [47.0, 145.5]
-]);
-
+```html
 Promise.all([
     fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
     fetch("ne_land_eastasia.geojson").then(r => r.json()),
@@ -182,195 +260,277 @@ Promise.all([
     fetch("trade_edges.json").then(r => r.json())
 ]).then(([ocean, land, coast, rivers, trade]) => {
 
-    L.geoJSON(ocean, {
-        style: {
-            color: "none",
-            fillColor: "#d8edf8",
-            fillOpacity: 1
+    L.geoJSON(ocean,{
+        style:{
+            color:"none",
+            fillColor:"#d8edf8",
+            fillOpacity:1
         }
     }).addTo(map);
 
-    L.geoJSON(land, {
-        style: {
-            color: "#bbbbbb",
-            weight: 0.5,
-            fillColor: "#f6f2e8",
-            fillOpacity: 1
+    L.geoJSON(land,{
+        style:{
+            color:"#bbbbbb",
+            weight:0.5,
+            fillColor:"#f6f2e8",
+            fillOpacity:1
         }
     }).addTo(map);
 
-    L.geoJSON(coast, {
-        style: {
-            color: "#777777",
-            weight: 0.8
+    L.geoJSON(coast,{
+        style:{
+            color:"#777777",
+            weight:0.8
         }
     }).addTo(map);
 
-    L.geoJSON(rivers, {
-        style: {
-            color: "#9ecae1",
-            weight: 0.45,
-            opacity: 0.5
+    L.geoJSON(rivers,{
+        style:{
+            color:"#9ecae1",
+            weight:0.45,
+            opacity:0.5
         }
     }).addTo(map);
 
     tradeData = trade;
-    layerGroup = L.layerGroup().addTo(map);
 
-map.fitBounds([
-    [25.0, 122.5],
-    [46.0, 145.0]
-]);
+    layerGroup = L.layerGroup().addTo(map);
+    labelGroup = L.layerGroup().addTo(map);
+
+    historicalLabels.forEach(d => {
+
+        L.marker([d.lat,d.lon],{
+
+            interactive:false,
+
+            icon:L.divIcon({
+                className:"historical-label",
+                html:d.name,
+                iconSize:[0,0]
+            })
+
+        }).addTo(labelGroup);
+
+    });
 
     drawMap();
+
 });
 
-function drawMap() {
-    if (!layerGroup) return;
+function drawMap(){
+
     layerGroup.clearLayers();
 
-    Object.keys(coords).forEach(name => {
-        L.circleMarker(coords[name], {
-            radius: name === "朝鮮" ? 8 : 6,
-            color: "#333",
-            weight: 1,
-            fillColor: name === "朝鮮" ? "#1f4e79" : "#666",
-            fillOpacity: 0.9
+    Object.keys(coords).forEach(name=>{
+
+        L.circleMarker(coords[name],{
+
+            radius:name==="朝鮮"?8:6,
+            color:"#333",
+            weight:1,
+            fillColor:name==="朝鮮"?"#1f4e79":"#666",
+            fillOpacity:0.9
+
         })
-        .bindTooltip(labels[name], {
-            permanent: true,
-            direction: "top"
+
+        .bindTooltip(labels[name],{
+            permanent:true,
+            direction:"top"
         })
+
         .addTo(layerGroup);
+
     });
 
-    let sub = tradeData.filter(d => {
-        if (d.period !== currentPeriod) return false;
-        if (currentView === "export") return d.flow === "export";
-        if (currentView === "import") return d.flow === "import";
+    let sub = tradeData.filter(d=>{
+
+        if(d.period!==currentPeriod) return false;
+
+        if(currentView==="export")
+            return d.flow==="export";
+
+        if(currentView==="import")
+            return d.flow==="import";
+
         return true;
+
     });
 
-    if (currentView === "overall") {
-        const grouped = {};
+    if(currentView==="overall"){
 
-        sub.forEach(d => {
-            if (!coords[d.partner]) return;
+        const grouped={};
 
-            if (!grouped[d.partner]) {
-                grouped[d.partner] = {
-                    partner: d.partner,
-                    period: d.period,
-                    flow: "overall",
-                    records: 0,
-                    quantity_sum: 0,
-                    items: new Set()
+        sub.forEach(d=>{
+
+            if(!grouped[d.partner]){
+
+                grouped[d.partner]={
+
+                    partner:d.partner,
+                    records:0,
+                    quantity_sum:0,
+                    items:new Set()
+
                 };
+
             }
 
-            grouped[d.partner].records += Number(d.records || 0);
-            grouped[d.partner].quantity_sum += Number(d.quantity_sum || 0);
+            grouped[d.partner].records += Number(d.records||0);
 
-            String(d.items || "").split(",").forEach(item => {
-                const cleaned = item.trim();
-                if (cleaned) grouped[d.partner].items.add(cleaned);
+            grouped[d.partner].quantity_sum += Number(d.quantity_sum||0);
+
+            String(d.items||"")
+
+            .split(",")
+
+            .forEach(x=>{
+
+                x=x.trim();
+
+                if(x) grouped[d.partner].items.add(x);
+
             });
+
         });
 
-        sub = Object.values(grouped).map(d => ({
-            partner: d.partner,
-            period: d.period,
-            flow: d.flow,
-            records: d.records,
-            quantity_sum: d.quantity_sum,
-            items: Array.from(d.items).join(", ")
+        sub = Object.values(grouped).map(d=>({
+
+            partner:d.partner,
+            records:d.records,
+            quantity_sum:d.quantity_sum,
+            items:Array.from(d.items).join(", ")
+
         }));
+
     }
 
-    const maxRecords = Math.max(...sub.map(d => Number(d.records)), 1);
+    const maxRecords=Math.max(...sub.map(d=>Number(d.records)),1);
 
-    sub.forEach(d => {
-        const partner = d.partner;
-        if (!coords[partner]) return;
+    sub.forEach(d=>{
 
-        let start, end, color, flowLabel;
+        if(!coords[d.partner]) return;
 
-        if (currentView === "overall") {
-            start = coords["朝鮮"];
-            end = coords[partner];
-            color = "#1f4e79";
-            flowLabel = "Overall";
-        } else if (d.flow === "export") {
-            start = coords["朝鮮"];
-            end = coords[partner];
-            color = "firebrick";
-            flowLabel = "Export from Joseon";
-        } else {
-            start = coords[partner];
-            end = coords["朝鮮"];
-            color = "royalblue";
-            flowLabel = "Import into Joseon";
+        let start,end,color,label;
+
+        if(currentView==="overall"){
+
+            start=coords["朝鮮"];
+            end=coords[d.partner];
+            color="#1f4e79";
+            label="Overall";
+
         }
 
-        const weight = 1.5 + (Number(d.records) / maxRecords) * 12;
+        else if(currentView==="export"){
 
-        L.polyline([start, end], {
-            color: color,
-            weight: weight,
-            opacity: 0.68,
-            lineCap: "round"
+            start=coords["朝鮮"];
+            end=coords[d.partner];
+            color="firebrick";
+            label="Export from Joseon";
+
+        }
+
+        else{
+
+            start=coords[d.partner];
+            end=coords["朝鮮"];
+            color="royalblue";
+            label="Import into Joseon";
+
+        }
+
+        const weight=1.5+(Number(d.records)/maxRecords)*12;
+
+        L.polyline([start,end],{
+
+            color:color,
+            weight:weight,
+            opacity:0.68,
+            lineCap:"round"
+
         })
+
         .bindTooltip(
-            `<b>${labels["朝鮮"]} ↔ ${labels[partner]}</b><br>
-             Period: ${periodLabel(currentPeriod)}<br>
-             Network: ${flowLabel}<br>
-             Trade records: ${Number(d.records).toLocaleString()}<br>
-             Quantity sum: ${Number(d.quantity_sum).toLocaleString()}<br>
-             Items: ${d.items}`,
+
+            `<b>${labels["朝鮮"]} ↔ ${labels[d.partner]}</b><br>
+            Period: ${periodLabel(currentPeriod)}<br>
+            Network: ${label}<br>
+            Trade records: ${Number(d.records).toLocaleString()}<br>
+            Quantity sum: ${Number(d.quantity_sum).toLocaleString()}<br>
+            Items: ${d.items}`,
+
             {
-                sticky: true,
-                className: "edge-tooltip"
+                sticky:true,
+                className:"edge-tooltip"
             }
+
         )
+
         .addTo(layerGroup);
+
     });
+
 }
 
-function periodLabel(period) {
-    if (period === "太祖-定宗") return "Taejo–Jeongjong (1392–1400)";
-    if (period === "太宗") return "Taejong (1400–1418)";
-    if (period === "世宗") return "Sejong (1418–1450)";
+function periodLabel(period){
+
+    if(period==="太祖-定宗")
+        return "Taejo–Jeongjong (1392–1400)";
+
+    if(period==="太宗")
+        return "Taejong (1400–1418)";
+
+    if(period==="世宗")
+        return "Sejong (1418–1450)";
+
     return period;
+
 }
 
-function setPeriod(period) {
-    currentPeriod = period;
+function setPeriod(period){
 
-    ["p1", "p2", "p3"].forEach(id => {
-        document.getElementById(id).classList.remove("active");
-    });
+    currentPeriod=period;
 
-    if (period === "太祖-定宗") document.getElementById("p1").classList.add("active");
-    if (period === "太宗") document.getElementById("p2").classList.add("active");
-    if (period === "世宗") document.getElementById("p3").classList.add("active");
+    ["p1","p2","p3"].forEach(id=>
+        document.getElementById(id).classList.remove("active")
+    );
+
+    if(period==="太祖-定宗")
+        document.getElementById("p1").classList.add("active");
+
+    if(period==="太宗")
+        document.getElementById("p2").classList.add("active");
+
+    if(period==="世宗")
+        document.getElementById("p3").classList.add("active");
 
     drawMap();
+
 }
 
-function setView(view) {
-    currentView = view;
+function setView(view){
 
-    ["v1", "v2", "v3"].forEach(id => {
-        document.getElementById(id).classList.remove("active");
-    });
+    currentView=view;
 
-    if (view === "overall") document.getElementById("v1").classList.add("active");
-    if (view === "export") document.getElementById("v2").classList.add("active");
-    if (view === "import") document.getElementById("v3").classList.add("active");
+    ["v1","v2","v3"].forEach(id=>
+        document.getElementById(id).classList.remove("active")
+    );
+
+    if(view==="overall")
+        document.getElementById("v1").classList.add("active");
+
+    if(view==="export")
+        document.getElementById("v2").classList.add("active");
+
+    if(view==="import")
+        document.getElementById("v3").classList.add("active");
 
     drawMap();
+
 }
+
 </script>
 
 </body>
 </html>
+```
