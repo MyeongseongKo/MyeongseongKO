@@ -20,7 +20,11 @@ body {
 }
 
 #sidebar {
-    display: none;
+    width: 265px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 
@@ -67,17 +71,23 @@ button.active {
 }
 
 #main {
-    width: 100vw;
-    height: 100vh;
+    flex: 1;
+    background: #d8edf8;
     padding: 0;
-    background: transparent;
+    box-sizing: border-box;
+    position: relative;
 }
 
 #map {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
+    background: #d8edf8;
     border: none;
     box-shadow: none;
+}
+
+#legend {
+    display: none;
 }
 
 .leaflet-tooltip {
@@ -228,8 +238,8 @@ const map = L.map("map", {
     attributionControl: false,
     minZoom: 5,
     maxZoom: 8
-}).setView([36.8, 126.2], 5);
-
+}).setView([36.8, 127.3], 5);
+    
 Promise.all([
     fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
     fetch("ne_land_eastasia.geojson").then(r => r.json()),
