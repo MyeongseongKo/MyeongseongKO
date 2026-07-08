@@ -86,45 +86,31 @@ height:85vh;
 var map=L.map('map').setView([37,128],5);
 
 Promise.all([
-    fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
-    fetch("ne_land_eastasia.geojson").then(r => r.json()),
-    fetch("ne_coast_eastasia.geojson").then(r => r.json()),
-    fetch("ne_rivers_eastasia.geojson").then(r => r.json())
-]).then(([ocean, land, coast, rivers]) => {
+  fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
+  fetch("ne_land_eastasia.geojson").then(r => r.json()),
+  fetch("ne_coast_eastasia.geojson").then(r => r.json()),
+  fetch("ne_rivers_eastasia.geojson").then(r => r.json()),
+  fetch("trade_edges.json").then(r => r.json())
+]).then(([ocean, land, coast, rivers, trade]) => {
+  tradeData = trade;
 
-    L.geoJSON(ocean, {
-        style: {
-            color: "none",
-            fillColor: "#d8edf8",
-            fillOpacity: 1
-        }
-    }).addTo(map);
+  L.geoJSON(ocean, {
+    style: { color: "none", fillColor: "#d8edf8", fillOpacity: 1 }
+  }).addTo(map);
 
-    L.geoJSON(land, {
-        style: {
-            color: "#bbbbbb",
-            weight: 0.5,
-            fillColor: "#f6f2e8",
-            fillOpacity: 1
-        }
-    }).addTo(map);
+  L.geoJSON(land, {
+    style: { color: "#bbb", weight: 0.5, fillColor: "#f6f2e8", fillOpacity: 1 }
+  }).addTo(map);
 
-    L.geoJSON(coast, {
-        style: {
-            color: "#777777",
-            weight: 0.8
-        }
-    }).addTo(map);
+  L.geoJSON(coast, {
+    style: { color: "#777", weight: 0.8 }
+  }).addTo(map);
 
-    L.geoJSON(rivers, {
-        style: {
-            color: "#9ecae1",
-            weight: 0.5,
-            opacity: 0.5
-        }
-    }).addTo(map);
+  L.geoJSON(rivers, {
+    style: { color: "#9ecae1", weight: 0.5, opacity: 0.5 }
+  }).addTo(map);
 
-    drawMap();
+  drawMap();
 });
 
 </script>
