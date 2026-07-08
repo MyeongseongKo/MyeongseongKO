@@ -97,9 +97,10 @@ button.active {
 }
 
 .historical-label {
-    font-size: 32px;
+    font-family: "Noto Serif CJK KR", "Nanum Myeongjo", "Batang", "Times New Roman", serif;
+    font-size: 34px;
     font-weight: 700;
-    color: rgba(0,0,0,0.45);
+    color: rgba(0,0,0,0.48);
     text-shadow: 1px 1px 3px white;
     white-space: nowrap;
     pointer-events: none;
@@ -189,14 +190,6 @@ button.active {
 
 <div id="main">
     <div id="map"></div>
-
-    <div id="legend">
-        <b>Legend</b><br><br>
-        <span class="dot joseon"></span> Joseon<br>
-        <span class="dot partner"></span> Trade partner<br><br>
-        <span class="line thick"></span> Many trade records<br>
-        <span class="line thin"></span> Few trade records
-    </div>
 </div>
 
 </div>
@@ -229,12 +222,12 @@ const labels = {
 };
 
 const historicalLabels = [
-    { name: "北元 / 蒙古", lat: 45.2, lon: 120.2 },
-    { name: "明", lat: 36.4, lon: 119.0 },
-    { name: "朝鮮", lat: 37.9, lon: 128.0 },
-    { name: "女眞", lat: 42.7, lon: 131.0 },
+    { name: "北元 / 蒙古", lat: 45.8, lon: 118.7 },
+    { name: "明", lat: 37.9, lon: 119.0 },
+    { name: "朝鮮", lat: 37.9, lon: 129.2 },
+    { name: "女眞", lat: 43.7, lon: 132.2 },
     { name: "日本", lat: 35.4, lon: 137.2 },
-    { name: "對馬", lat: 34.1, lon: 129.5 },
+    { name: "對馬", lat: 34.1, lon: 129.6 },
     { name: "琉球", lat: 26.0, lon: 127.8 }
 ];
 
