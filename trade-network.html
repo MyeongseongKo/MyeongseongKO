@@ -95,7 +95,23 @@ button.active {
 .leaflet-tooltip.edge-tooltip {
     font-weight: normal;
     font-size: 13px;
-    line-height: 1.4;
+    line-height: 1.45;
+
+    max-width: 360px;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.item-list{
+    display:inline;
+    white-space:normal;
+    word-break:normal;
+    overflow-wrap:normal;
+}
+
+.item-list wbr{
+    display:inline;
 }
 
 .historical-label {
@@ -468,9 +484,15 @@ function drawMap(){
 
         }
 
-        const weight=1.5+(Number(d.records)/maxRecords)*12;
+const weight=1.5+(Number(d.records)/maxRecords)*12;
 
-        L.polyline([start,end],{
+const itemsHTML = String(d.items || "")
+    .split(",")
+    .map(x => x.trim())
+    .filter(x => x)
+    .join(",<wbr> ");
+        
+L.polyline([start,end],{
 
             color:color,
             weight:weight,
@@ -479,21 +501,22 @@ function drawMap(){
 
         })
 
-        .bindTooltip(
+.bindTooltip(
 
-            `<b>${labels["朝鮮"]} ↔ ${labels[d.partner]}</b><br>
-            Period: ${periodLabel(currentPeriod)}<br>
-            Network: ${label}<br>
-            Trade records: ${Number(d.records).toLocaleString()}<br>
-            Quantity sum: ${Number(d.quantity_sum).toLocaleString()}<br>
-            Items: ${d.items}`,
+`<b>${labels["朝鮮"]} ↔ ${labels[d.partner]}</b><br>
+Period: ${periodLabel(currentPeriod)}<br>
+Network: ${label}<br>
+Trade records: ${Number(d.records).toLocaleString()}<br>
+Quantity sum: ${Number(d.quantity_sum).toLocaleString()}<br>
+Items:
+<span class="item-list">${itemsHTML}</span>`,
 
-            {
-                sticky:true,
-                className:"edge-tooltip"
-            }
+{
+    sticky: true,
+    className: "edge-tooltip"
+}
 
-        )
+)
 
         .addTo(layerGroup);
 
