@@ -20,27 +20,32 @@ html, body{
     background:#fff;
 }
 
-/* Navigation */
+/* ===========================
+   Navigation
+=========================== */
 
 .navbar{
     display:flex;
     justify-content:flex-end;
-    gap:15px;
-    padding:25px 40px;
-    border-bottom:2px solid #ddd;
+    gap:20px;
+    padding:20px 40px;
+    background:#990000;
 }
 
 .navbar a{
-    color:#990000;
+    color:white;
     text-decoration:none;
     font-weight:700;
+    transition:.2s;
 }
 
 .navbar a:hover{
-    color:#770000;
+    color:#f4d2d2;
 }
 
-/* Content */
+/* ===========================
+   Content
+=========================== */
 
 .content{
     max-width:1000px;
@@ -84,30 +89,36 @@ h2{
     margin-bottom:8px;
 }
 
-a{
+.content a{
     color:#990000;
+    text-decoration:none;
 }
 
-a:hover{
-    color:#770000;
+.content a:hover{
+    text-decoration:underline;
 }
 
-/* Footer */
+/* ===========================
+   Footer
+=========================== */
 
 footer{
     margin-top:70px;
-    border-top:2px solid #ddd;
+    background:#990000;
+    color:white;
     text-align:right;
-    padding:20px 40px;
-    color:#777;
+    padding:18px 40px;
 }
 
-/* Mobile */
+/* ===========================
+   Mobile
+=========================== */
 
 @media(max-width:768px){
 
     .navbar{
         justify-content:center;
+        gap:15px;
         padding:18px;
     }
 
@@ -180,11 +191,12 @@ Summer 2026
 <div class="course-box">
 
 <ul class="materials-list">
+
 <li><a href="#">Univariate Calculus Review</a></li>
 
 <li><a href="#">Linear Algebra Review</a></li>
 
-<li><a href="#">Multivariate Calculus Review/a></li>
+<li><a href="#">Multivariate Calculus Review</a></li>
 
 <li><a href="#">Probability Review</a></li>
 
