@@ -441,6 +441,11 @@ map.fitBounds([
     padding: [0, 0]
 });
 
+// 모바일에서 지도 크기 다시 계산
+setTimeout(() => {
+    map.invalidateSize();
+}, 200);
+
 });
 
 function drawMap(){
