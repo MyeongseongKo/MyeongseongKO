@@ -8,14 +8,225 @@
 
 <title>Teaching | Myeongseong Ko</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+html, body{
+    height:100%;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    font-family:'Inter',sans-serif;
+    color:#333;
+    line-height:1.6;
+}
+
+/* Navigation Bar */
+
+.navbar{
+    position:absolute;
+    top:25px;
+    right:35px;
+    display:flex;
+    gap:12px;
+    z-index:1000;
+}
+
+.navbar a{
+    color:white;
+    background:rgba(153,0,0,0.85);
+    padding:8px 14px;
+    border-radius:5px;
+    text-decoration:none;
+    font-weight:700;
+    transition:0.2s;
+}
+
+.navbar a:hover{
+    background:#770000;
+}
+
+/* Page Header */
+
+.page-header{
+    background:#990000;
+    color:white;
+    padding:90px 40px 60px;
+    text-align:center;
+}
+
+.page-header h1{
+    font-size:48px;
+    margin:0;
+}
+
+.page-header p{
+    margin-top:10px;
+    font-size:18px;
+}
+
+/* Content */
+
+.content{
+    max-width:1100px;
+    margin:auto;
+    padding:40px;
+    flex:1;
+}
+
+section{
+    margin-bottom:50px;
+}
+
+h2{
+    border-bottom:2px solid #ccc;
+    padding-bottom:5px;
+}
+
+.course-box{
+    background:#f8f8f8;
+    border-left:5px solid #990000;
+    padding:20px 25px;
+    border-radius:6px;
+    margin-top:20px;
+}
+
+.course-box h3{
+    margin-top:0;
+}
+
+.materials-list li{
+    margin-bottom:8px;
+}
+
+a{
+    color:#990000;
+}
+
+a:hover{
+    color:#770000;
+}
+
+/* Footer */
+
+footer{
+    background:#990000;
+    color:white;
+    text-align:right;
+    padding:10px 20px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .navbar{
+        top:18px;
+        right:20px;
+        gap:10px;
+        font-size:15px;
+    }
+
+    .page-header{
+        padding:85px 20px 50px;
+    }
+
+    .page-header h1{
+        font-size:36px;
+    }
+
+    .content{
+        padding:25px;
+    }
+
+    footer{
+        text-align:center;
+    }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h1>Teaching</h1>
+<nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+</nav>
 
-<p>Teaching materials will be posted here.</p>
+<div class="page-header">
+    <h1>Teaching</h1>
+    <p>Teaching materials and course information</p>
+</div>
 
+<div class="content">
+
+<section>
+
+<h2>Courses</h2>
+
+<div class="course-box">
+
+<h3>Mathematics Camp for Incoming Graduate Students</h3>
+
+<p>
+<strong>Indiana University Bloomington</strong><br>
+Department of Economics<br>
+Summer 2026
+</p>
+
+<p>
+Materials for Mathematics Camp will be posted here.
+</p>
+
+<ul class="materials-list">
+    <li><a href="#">Syllabus</a> <em>(coming soon)</em></li>
+    <li><a href="#">Lecture Notes</a> <em>(coming soon)</em></li>
+    <li><a href="#">Problem Sets</a> <em>(coming soon)</em></li>
+    <li><a href="#">Solutions</a> <em>(coming soon)</em></li>
+    <li><a href="#">Python / MATLAB Code</a> <em>(coming soon)</em></li>
+</ul>
+
+</div>
+
+<div class="course-box">
+
+<h3>Graduate Microeconomics</h3>
+
+<p>
+<strong>Indiana University Bloomington</strong><br>
+Department of Economics<br>
+Fall 2026
+</p>
+
+<p>
+Course-related information may be posted here.
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+<footer>
+
+Copyright © <span id="year"></span> Myeongseong Ko
+
+</footer>
+
+<script>
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+</script>
+
+</body>
+
+</html>
 <p><a href="index.html">← Back to Home</a></p>
 
 </body>
