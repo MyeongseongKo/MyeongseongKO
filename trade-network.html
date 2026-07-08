@@ -8,91 +8,40 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
-#container {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-}
+body { margin:0; font-family:Arial, sans-serif; }
+#container { display:flex; height:100vh; overflow:hidden; }
 
 #sidebar {
-    width: 265px;
-    padding: 20px;
-    background: #f7f7f7;
-    border-right: 1px solid #ddd;
-    box-sizing: border-box;
+    width:265px; padding:20px; background:#f7f7f7;
+    border-right:1px solid #ddd; box-sizing:border-box;
 }
-
-#sidebar h1 {
-    font-size: 22px;
-    margin-top: 0;
-    line-height: 1.2;
-}
-
-#subtitle {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 22px;
-}
-
-.section-title {
-    margin-top: 20px;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
+#sidebar h1 { font-size:22px; margin-top:0; line-height:1.2; }
+#subtitle { font-size:14px; color:#333; margin-bottom:22px; }
+.section-title { margin-top:20px; margin-bottom:8px; font-weight:bold; }
 
 button {
-    display: block;
-    width: 100%;
-    margin: 8px 0;
-    padding: 10px 12px;
-    font-size: 15px;
-    cursor: pointer;
-    border: 1px solid #aaa;
-    border-radius: 6px;
-    background: white;
+    display:block; width:100%; margin:8px 0; padding:10px 12px;
+    font-size:15px; cursor:pointer; border:1px solid #aaa;
+    border-radius:6px; background:white;
 }
-
-button.active {
-    background: #1f4e79;
-    color: white;
-}
+button.active { background:#1f4e79; color:white; }
 
 .note {
-    margin-top: 22px;
-    font-size: 12.5px;
-    color: #555;
-    line-height: 1.5;
+    margin-top:22px; font-size:12.5px; color:#555; line-height:1.5;
 }
 
 #main {
-    flex: 1;
-    background: #d9d9d9;
-    padding: 10px;
-    box-sizing: border-box;
+    flex:1; background:#d9d9d9; padding:8px; box-sizing:border-box;
 }
-
 #map {
-    width: 100%;
-    height: calc(100vh - 20px);
-    background: #d8edf8;
-    border: 1px solid #cfcfcf;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    width:100%; height:calc(100vh - 16px); background:#d8edf8;
+    border:1px solid #cfcfcf;
+    box-shadow:0 5px 18px rgba(0,0,0,0.12);
 }
 
-.leaflet-tooltip {
-    font-size: 13px;
-    font-weight: 600;
-}
-
+.leaflet-tooltip { font-size:13px; font-weight:600; }
 .leaflet-tooltip.edge-tooltip {
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 1.4;
+    font-weight:normal; font-size:13px; line-height:1.4;
 }
 </style>
 </head>
@@ -164,19 +113,19 @@ const labels = {
 };
 
 const map = L.map("map", {
-    zoomControl: false,
-    dragging: false,
-    scrollWheelZoom: false,
-    doubleClickZoom: false,
-    boxZoom: false,
-    keyboard: false,
-    touchZoom: false,
-    attributionControl: false
-}).setView([36.9, 124.8], 5);
+    zoomControl:true,
+    dragging:true,
+    scrollWheelZoom:true,
+    doubleClickZoom:true,
+    boxZoom:true,
+    keyboard:true,
+    touchZoom:true,
+    attributionControl:false
+}).setView([36.8, 126.2], 5);
 
 map.setMaxBounds([
-    [22, 116],
-    [48, 147]
+    [18, 108],
+    [52, 155]
 ]);
 
 Promise.all([
@@ -188,44 +137,28 @@ Promise.all([
 ]).then(([ocean, land, coast, rivers, trade]) => {
 
     L.geoJSON(ocean, {
-        style: {
-            color: "none",
-            fillColor: "#d8edf8",
-            fillOpacity: 1
-        }
+        style:{ color:"none", fillColor:"#d8edf8", fillOpacity:1 }
     }).addTo(map);
 
     L.geoJSON(land, {
-        style: {
-            color: "#bbbbbb",
-            weight: 0.5,
-            fillColor: "#f6f2e8",
-            fillOpacity: 1
-        }
+        style:{ color:"#bbbbbb", weight:0.5, fillColor:"#f6f2e8", fillOpacity:1 }
     }).addTo(map);
 
     L.geoJSON(coast, {
-        style: {
-            color: "#777777",
-            weight: 0.8
-        }
+        style:{ color:"#777777", weight:0.8 }
     }).addTo(map);
 
     L.geoJSON(rivers, {
-        style: {
-            color: "#9ecae1",
-            weight: 0.45,
-            opacity: 0.5
-        }
+        style:{ color:"#9ecae1", weight:0.45, opacity:0.5 }
     }).addTo(map);
 
     tradeData = trade;
     layerGroup = L.layerGroup().addTo(map);
 
-map.fitBounds([
-    [23, 112],
-    [48, 150]
-]);
+    map.fitBounds([
+        [24.5, 119.5],
+        [46.5, 145.5]
+    ]);
 
     drawMap();
 });
@@ -237,26 +170,62 @@ function drawMap() {
     Object.keys(coords).forEach(name => {
         L.circleMarker(coords[name], {
             radius: name === "朝鮮" ? 8 : 6,
-            color: "#333",
-            weight: 1,
+            color:"#333",
+            weight:1,
             fillColor: name === "朝鮮" ? "#1f4e79" : "#666",
-            fillOpacity: 0.9
+            fillOpacity:0.9
         })
         .bindTooltip(labels[name], {
-            permanent: true,
-            direction: "top"
+            permanent:true,
+            direction:"top"
         })
         .addTo(layerGroup);
     });
 
-    const sub = tradeData.filter(d => {
+    let sub = tradeData.filter(d => {
         if (d.period !== currentPeriod) return false;
-        if (currentView === "overall") return true;
         if (currentView === "export") return d.flow === "export";
         if (currentView === "import") return d.flow === "import";
+        return true;
     });
 
-    const maxRecords = Math.max(...sub.map(d => d.records), 1);
+    if (currentView === "overall") {
+        const grouped = {};
+
+        sub.forEach(d => {
+            if (!coords[d.partner]) return;
+
+            if (!grouped[d.partner]) {
+                grouped[d.partner] = {
+                    partner:d.partner,
+                    period:d.period,
+                    flow:"overall",
+                    records:0,
+                    quantity_sum:0,
+                    items:new Set()
+                };
+            }
+
+            grouped[d.partner].records += Number(d.records || 0);
+            grouped[d.partner].quantity_sum += Number(d.quantity_sum || 0);
+
+            String(d.items || "").split(",").forEach(item => {
+                const cleaned = item.trim();
+                if (cleaned) grouped[d.partner].items.add(cleaned);
+            });
+        });
+
+        sub = Object.values(grouped).map(d => ({
+            partner:d.partner,
+            period:d.period,
+            flow:d.flow,
+            records:d.records,
+            quantity_sum:d.quantity_sum,
+            items:Array.from(d.items).join(", ")
+        }));
+    }
+
+    const maxRecords = Math.max(...sub.map(d => Number(d.records)), 1);
 
     sub.forEach(d => {
         const partner = d.partner;
@@ -268,7 +237,7 @@ function drawMap() {
             start = coords["朝鮮"];
             end = coords[partner];
             color = "#1f4e79";
-            flowLabel = d.flow;
+            flowLabel = "Overall";
         } else if (d.flow === "export") {
             start = coords["朝鮮"];
             end = coords[partner];
@@ -281,24 +250,24 @@ function drawMap() {
             flowLabel = "Import into Joseon";
         }
 
-        const weight = 1.3 + (d.records / maxRecords) * 12;
+        const weight = 1.5 + (Number(d.records) / maxRecords) * 12;
 
         L.polyline([start, end], {
-            color: color,
-            weight: weight,
-            opacity: 0.68,
-            lineCap: "round"
+            color:color,
+            weight:weight,
+            opacity:0.68,
+            lineCap:"round"
         })
         .bindTooltip(
             `<b>${labels["朝鮮"]} ↔ ${labels[partner]}</b><br>
              Period: ${periodLabel(currentPeriod)}<br>
-             Flow: ${flowLabel}<br>
-             Trade records: ${d.records}<br>
+             Network: ${flowLabel}<br>
+             Trade records: ${Number(d.records).toLocaleString()}<br>
              Quantity sum: ${Number(d.quantity_sum).toLocaleString()}<br>
              Items: ${d.items}`,
             {
-                sticky: true,
-                className: "edge-tooltip"
+                sticky:true,
+                className:"edge-tooltip"
             }
         )
         .addTo(layerGroup);
@@ -315,7 +284,7 @@ function periodLabel(period) {
 function setPeriod(period) {
     currentPeriod = period;
 
-    ["p1", "p2", "p3"].forEach(id => {
+    ["p1","p2","p3"].forEach(id => {
         document.getElementById(id).classList.remove("active");
     });
 
@@ -329,7 +298,7 @@ function setPeriod(period) {
 function setView(view) {
     currentView = view;
 
-    ["v1", "v2", "v3"].forEach(id => {
+    ["v1","v2","v3"].forEach(id => {
         document.getElementById(id).classList.remove("active");
     });
 
