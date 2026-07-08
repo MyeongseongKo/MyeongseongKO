@@ -683,19 +683,16 @@ function drawMap(){
 
         }
 
-const weight =
-    (window.innerWidth <= 768)
-        ? 3 + (Number(d.records) / maxRecords) * 16
-        : 1.5 + (Number(d.records) / maxRecords) * 12;
+const weight = 1.5 + (Number(d.records) / maxRecords) * 12;
         
 L.polyline([start,end],{
 
     color: color,
     weight: weight,
-    opacity: isMobile ? 0.88 : 0.68,
+    opacity:0.68,
     lineCap: "round"
 
-});
+})
 
 .bindTooltip(
 
