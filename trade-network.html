@@ -96,22 +96,17 @@ button.active {
     font-weight: normal;
     font-size: 13px;
     line-height: 1.45;
-
-    max-width: 360px;
+    max-width: 420px;
     white-space: normal;
-    word-break: break-word;
+    word-break: keep-all;
     overflow-wrap: break-word;
 }
 
-.item-list{
-    display:inline;
-    white-space:normal;
-    word-break:normal;
-    overflow-wrap:normal;
-}
-
-.item-list wbr{
-    display:inline;
+.item-list {
+    display: inline;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 .historical-label {
@@ -485,12 +480,6 @@ function drawMap(){
         }
 
 const weight=1.5+(Number(d.records)/maxRecords)*12;
-
-const itemsHTML = String(d.items || "")
-    .split(",")
-    .map(x => x.trim())
-    .filter(x => x)
-    .join(",<wbr> ");
         
 L.polyline([start,end],{
 
@@ -509,7 +498,7 @@ Network: ${label}<br>
 Trade records: ${Number(d.records).toLocaleString()}<br>
 Quantity sum: ${Number(d.quantity_sum).toLocaleString()}<br>
 Items:
-<span class="item-list">${itemsHTML}</span>`,
+<span class="item-list">${d.items}</span>`,
 
 {
     sticky: true,
