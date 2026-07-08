@@ -20,7 +20,7 @@ body {
 }
 
 #sidebar {
-    width: 265px;
+    width: 420px;     /* 원하는 만큼 */
     padding: 20px;
     background: #f7f7f7;
     border-right: 1px solid #ddd;
@@ -296,13 +296,13 @@ Promise.all([
 
     });
 
-   drawMap();
+drawMap();
 
 map.fitBounds([
-    [24.5, 118.0],   // 남서쪽
-    [45.5, 145.5]    // 북동쪽
+    [24.5, 120.8],
+    [45.5, 145.5]
 ], {
-    padding: [10,10]
+    padding: [0, 0]
 });
 
 });
