@@ -1,120 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="utf-8">
-
 <title>Historical East Asian Trade Network</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
-
-body{
-
-margin:0;
-font-family:Arial;
-
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-h1{
-
-text-align:center;
-margin-top:20px;
-
+#container {
+    display: flex;
+    height: 100vh;
 }
 
-#toolbar{
-
-text-align:center;
-margin-bottom:15px;
-
+#sidebar {
+    width: 300px;
+    padding: 24px;
+    background: #f7f7f7;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
-button{
-
-padding:8px 14px;
-margin:5px;
-font-size:15px;
-cursor:pointer;
-
+#sidebar h1 {
+    font-size: 24px;
+    margin-top: 0;
+    line-height: 1.2;
 }
 
-#map{
-
-width:100%;
-height:85vh;
-
+.section-title {
+    margin-top: 24px;
+    font-weight: bold;
 }
 
+button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px 12px;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    background: white;
+}
+
+button.active {
+    background: #1f4e79;
+    color: white;
+}
+
+.note {
+    margin-top: 24px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+}
+
+#map {
+    flex: 1;
+    height: 100vh;
+    background: #ddd;
+}
 </style>
-
 </head>
 
 <body>
 
-<h1>Historical East Asian Trade Network (1392–1450)</h1>
+<div id="container">
 
-<div id="toolbar">
+<div id="sidebar">
+    <h1>Historical East Asian Trade Network</h1>
+    <p>Joseon trade networks, 1392–1450</p>
 
-<button>Taejo–Jeongjong</button>
+    <div class="section-title">Period</div>
+    <button id="p1" onclick="setPeriod('太祖-定宗')" class="active">
+        Taejo–Jeongjong<br>(1392–1400)
+    </button>
+    <button id="p2" onclick="setPeriod('太宗')">
+        Taejong<br>(1400–1418)
+    </button>
+    <button id="p3" onclick="setPeriod('世宗')">
+        Sejong<br>(1418–1450)
+    </button>
 
-<button>Taejong</button>
+    <div class="section-title">Network</div>
+    <button id="v1" onclick="setView('overall')" class="active">Overall</button>
+    <button id="v2" onclick="setView('export')">Exports from Joseon</button>
+    <button id="v3" onclick="setView('import')">Imports into Joseon</button>
 
-<button>Sejong</button>
+    <div class="note">
+        Export and import directions are currently shown only when direction is
+        identified through conservative rule-based extraction. Ambiguous records
+        are included in the overall network and will be refined using LLM-assisted
+        classification in future updates.
+    </div>
 
-<br><br>
-
-<button>Overall</button>
-
-<button>Exports</button>
-
-<button>Imports</button>
-
+    <p class="note"><a href="research.html">← Back to Research</a></p>
 </div>
 
 <div id="map"></div>
 
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+let currentPeriod = "太祖-定宗";
+let currentView = "overall";
+let tradeData = [];
+let layerGroup;
 
-var map=L.map('map').setView([37,128],5);
+const coords = {
+    "朝鮮": [37.57, 126.98],
+    "明/遼東": [41.80, 123.43],
+    "日本/倭": [35.02, 135.75],
+    "對馬": [34.20, 129.29],
+    "女眞/野人": [43.00, 129.73],
+    "琉球": [26.21, 127.68]
+};
+
+const labels = {
+    "朝鮮": "Joseon",
+    "明/遼東": "Ming / Liaodong",
+    "日本/倭": "Japan",
+    "對馬": "Tsushima",
+    "女眞/野人": "Jurchen",
+    "琉球": "Ryukyu"
+};
+
+const map = L.map("map", {
+    zoomControl: false,
+    dragging: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    touchZoom: false
+}).setView([36.8, 125.3], 5);
 
 Promise.all([
-  fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
-  fetch("ne_land_eastasia.geojson").then(r => r.json()),
-  fetch("ne_coast_eastasia.geojson").then(r => r.json()),
-  fetch("ne_rivers_eastasia.geojson").then(r => r.json()),
-  fetch("trade_edges.json").then(r => r.json())
+    fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
+    fetch("ne_land_eastasia.geojson").then(r => r.json()),
+    fetch("ne_coast_eastasia.geojson").then(r => r.json()),
+    fetch("ne_rivers_eastasia.geojson").then(r => r.json()),
+    fetch("trade_edges.json").then(r => r.json())
 ]).then(([ocean, land, coast, rivers, trade]) => {
-  tradeData = trade;
 
-  L.geoJSON(ocean, {
-    style: { color: "none", fillColor: "#d8edf8", fillOpacity: 1 }
-  }).addTo(map);
+    L.geoJSON(ocean, {
+        style: { color: "none", fillColor: "#d8edf8", fillOpacity: 1 }
+    }).addTo(map);
 
-  L.geoJSON(land, {
-    style: { color: "#bbb", weight: 0.5, fillColor: "#f6f2e8", fillOpacity: 1 }
-  }).addTo(map);
+    L.geoJSON(land, {
+        style: { color: "#bbbbbb", weight: 0.5, fillColor: "#f6f2e8", fillOpacity: 1 }
+    }).addTo(map);
 
-  L.geoJSON(coast, {
-    style: { color: "#777", weight: 0.8 }
-  }).addTo(map);
+    L.geoJSON(coast, {
+        style: { color: "#777777", weight: 0.8 }
+    }).addTo(map);
 
-  L.geoJSON(rivers, {
-    style: { color: "#9ecae1", weight: 0.5, opacity: 0.5 }
-  }).addTo(map);
+    L.geoJSON(rivers, {
+        style: { color: "#9ecae1", weight: 0.45, opacity: 0.5 }
+    }).addTo(map);
 
-  drawMap();
+    tradeData = trade;
+    layerGroup = L.layerGroup().addTo(map);
+    drawMap();
 });
 
+function drawMap() {
+    if (!layerGroup) return;
+    layerGroup.clearLayers();
+
+    Object.keys(coords).forEach(name => {
+        L.circleMarker(coords[name], {
+            radius: name === "朝鮮" ? 8 : 6,
+            color: "#333",
+            weight: 1,
+            fillColor: name === "朝鮮" ? "#1f4e79" : "#777",
+            fillOpacity: 0.9
+        })
+        .bindTooltip(labels[name], {permanent: true, direction: "top"})
+        .addTo(layerGroup);
+    });
+
+    const sub = tradeData.filter(d => {
+        if (d.period !== currentPeriod) return false;
+        if (currentView === "overall") return true;
+        if (currentView === "export") return d.flow === "export";
+        if (currentView === "import") return d.flow === "import";
+    });
+
+    const maxRecords = Math.max(...sub.map(d => d.records), 1);
+
+    sub.forEach(d => {
+        const partner = d.partner;
+        if (!coords[partner]) return;
+
+        let start, end, color;
+
+        if (currentView === "overall") {
+            start = coords["朝鮮"];
+            end = coords[partner];
+            color = "#1f4e79";
+        } else if (d.flow === "export") {
+            start = coords["朝鮮"];
+            end = coords[partner];
+            color = "firebrick";
+        } else {
+            start = coords[partner];
+            end = coords["朝鮮"];
+            color = "royalblue";
+        }
+
+        const weight = 1.5 + (d.records / maxRecords) * 12;
+
+        L.polyline([start, end], {
+            color: color,
+            weight: weight,
+            opacity: 0.65
+        })
+        .bindTooltip(
+            `<b>${labels["朝鮮"]} ↔ ${labels[partner]}</b><br>
+            Period: ${currentPeriod}<br>
+            Flow: ${d.flow}<br>
+            Trade records: ${d.records}<br>
+            Quantity sum: ${d.quantity_sum}<br>
+            Items: ${d.items}`
+        )
+        .addTo(layerGroup);
+    });
+}
+
+function setPeriod(period) {
+    currentPeriod = period;
+
+    document.getElementById("p1").classList.remove("active");
+    document.getElementById("p2").classList.remove("active");
+    document.getElementById("p3").classList.remove("active");
+
+    if (period === "太祖-定宗") document.getElementById("p1").classList.add("active");
+    if (period === "太宗") document.getElementById("p2").classList.add("active");
+    if (period === "世宗") document.getElementById("p3").classList.add("active");
+
+    drawMap();
+}
+
+function setView(view) {
+    currentView = view;
+
+    document.getElementById("v1").classList.remove("active");
+    document.getElementById("v2").classList.remove("active");
+    document.getElementById("v3").classList.remove("active");
+
+    if (view === "overall") document.getElementById("v1").classList.add("active");
+    if (view === "export") document.getElementById("v2").classList.add("active");
+    if (view === "import") document.getElementById("v3").classList.add("active");
+
+    drawMap();
+}
 </script>
 
 </body>
-
 </html>
