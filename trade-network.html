@@ -198,13 +198,14 @@ button.active {
 
 #main {
     position: absolute !important;
-    top: 120px;
+    top: 104px;
     left: 0;
     right: 0;
     bottom: 135px;
     width: 100% !important;
     background: #d8edf8;
 }
+
     #map {
         width: 100% !important;
         height: 100% !important;
@@ -250,9 +251,24 @@ button.active {
     }
 
     .section-title,
-    button {
-        display: none !important;
-    }
+    
+button {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 7px 5px !important;
+    font-size: 11px !important;
+    line-height: 1.15 !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(0,0,0,0.28) !important;
+    background: rgba(255,255,255,0.94) !important;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.12);
+}
+
+button.active {
+    background: #1f4e79 !important;
+    color: white !important;
+    border-color: #1f4e79 !important;
+}
 
     .note {
         display: none !important;
@@ -667,16 +683,19 @@ function drawMap(){
 
         }
 
-const weight=1.5+(Number(d.records)/maxRecords)*12;
+const weight =
+    (window.innerWidth <= 768)
+        ? 3 + (Number(d.records) / maxRecords) * 16
+        : 1.5 + (Number(d.records) / maxRecords) * 12;
         
 L.polyline([start,end],{
 
-            color:color,
-            weight:weight,
-            opacity:0.68,
-            lineCap:"round"
+    color: color,
+    weight: weight,
+    opacity: isMobile ? 0.88 : 0.68,
+    lineCap: "round"
 
-        })
+});
 
 .bindTooltip(
 
