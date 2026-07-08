@@ -126,23 +126,25 @@ button.active {
 
 #legend {
     position: absolute;
-    right: 25px;
-    bottom: 25px;
-    width: 250px;
+    right: 18px;
+    bottom: 18px;
+
+    width: 205px;          /* 250 → 205 */
 
     background: rgba(255,255,255,0.95);
-    padding: 15px 18px;
+
+    padding: 12px 14px;    /* 여백 축소 */
 
     border-radius: 8px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.18);
 
-    font-size: 13px;
-    line-height: 1.55;
+    font-size: 12px;       /* 13 → 12 */
+    line-height: 1.4;      /* 조금 더 촘촘하게 */
+
     color:#333;
-
-    z-index: 500;
+    z-index:500;
 }
-
+    
 .dot {
     display: inline-block;
     width: 12px;
