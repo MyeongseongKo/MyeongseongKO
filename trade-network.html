@@ -61,10 +61,22 @@ button.active {
     line-height: 1.5;
 }
 
-#map {
+#main {
     flex: 1;
-    height: 100vh;
-    background: #ddd;
+    background: #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 36px;
+    box-sizing: border-box;
+}
+
+#map {
+    width: 94%;
+    height: 90vh;
+    background: #d8edf8;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
 }
 </style>
 </head>
@@ -78,15 +90,9 @@ button.active {
     <p>Joseon trade networks, 1392–1450</p>
 
     <div class="section-title">Period</div>
-    <button id="p1" onclick="setPeriod('太祖-定宗')" class="active">
-        Taejo–Jeongjong<br>(1392–1400)
-    </button>
-    <button id="p2" onclick="setPeriod('太宗')">
-        Taejong<br>(1400–1418)
-    </button>
-    <button id="p3" onclick="setPeriod('世宗')">
-        Sejong<br>(1418–1450)
-    </button>
+    <button id="p1" onclick="setPeriod('太祖-定宗')" class="active">Taejo–Jeongjong<br>(1392–1400)</button>
+    <button id="p2" onclick="setPeriod('太宗')">Taejong<br>(1400–1418)</button>
+    <button id="p3" onclick="setPeriod('世宗')">Sejong<br>(1418–1450)</button>
 
     <div class="section-title">Network</div>
     <button id="v1" onclick="setView('overall')" class="active">Overall</button>
@@ -103,7 +109,9 @@ button.active {
     <p class="note"><a href="research.html">← Back to Research</a></p>
 </div>
 
-<div id="map"></div>
+<div id="main">
+    <div id="map"></div>
+</div>
 
 </div>
 
@@ -140,8 +148,9 @@ const map = L.map("map", {
     doubleClickZoom: false,
     boxZoom: false,
     keyboard: false,
-    touchZoom: false
-}).setView([36.8, 125.3], 5);
+    touchZoom: false,
+    attributionControl: false
+}).setView([36.8, 124.7], 5);
 
 Promise.all([
     fetch("ne_ocean_eastasia.geojson").then(r => r.json()),
@@ -217,7 +226,7 @@ function drawMap() {
             color = "royalblue";
         }
 
-        const weight = 1.5 + (d.records / maxRecords) * 12;
+        const weight = 1.2 + (d.records / maxRecords) * 11;
 
         L.polyline([start, end], {
             color: color,
@@ -226,7 +235,7 @@ function drawMap() {
         })
         .bindTooltip(
             `<b>${labels["朝鮮"]} ↔ ${labels[partner]}</b><br>
-            Period: ${currentPeriod}<br>
+            Period: ${periodLabel(currentPeriod)}<br>
             Flow: ${d.flow}<br>
             Trade records: ${d.records}<br>
             Quantity sum: ${d.quantity_sum}<br>
@@ -236,12 +245,17 @@ function drawMap() {
     });
 }
 
+function periodLabel(period) {
+    if (period === "太祖-定宗") return "Taejo–Jeongjong (1392–1400)";
+    if (period === "太宗") return "Taejong (1400–1418)";
+    if (period === "世宗") return "Sejong (1418–1450)";
+    return period;
+}
+
 function setPeriod(period) {
     currentPeriod = period;
 
-    document.getElementById("p1").classList.remove("active");
-    document.getElementById("p2").classList.remove("active");
-    document.getElementById("p3").classList.remove("active");
+    ["p1","p2","p3"].forEach(id => document.getElementById(id).classList.remove("active"));
 
     if (period === "太祖-定宗") document.getElementById("p1").classList.add("active");
     if (period === "太宗") document.getElementById("p2").classList.add("active");
@@ -253,9 +267,7 @@ function setPeriod(period) {
 function setView(view) {
     currentView = view;
 
-    document.getElementById("v1").classList.remove("active");
-    document.getElementById("v2").classList.remove("active");
-    document.getElementById("v3").classList.remove("active");
+    ["v1","v2","v3"].forEach(id => document.getElementById(id).classList.remove("active"));
 
     if (view === "overall") document.getElementById("v1").classList.add("active");
     if (view === "export") document.getElementById("v2").classList.add("active");
