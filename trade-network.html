@@ -170,8 +170,8 @@ const map = L.map("map", {
 }).setView([36.8, 126.2], 5);
 
 map.setMaxBounds([
-    [20, 108],
-    [52, 155]
+    [24.0, 122.0],
+    [47.0, 145.5]
 ]);
 
 Promise.all([
@@ -217,10 +217,10 @@ Promise.all([
     tradeData = trade;
     layerGroup = L.layerGroup().addTo(map);
 
-    map.fitBounds([
-        [25.5, 120.0],
-        [45.5, 142.5]
-    ]);
+map.fitBounds([
+    [25.0, 122.5],
+    [46.0, 145.0]
+]);
 
     drawMap();
 });
