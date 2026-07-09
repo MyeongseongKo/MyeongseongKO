@@ -196,7 +196,14 @@ button.active {
         background:#d8edf8;
     }
 
-    /* ---------- Header ---------- */
+        .mobile-hint{
+        display:block !important;
+        margin-top:6px;
+        font-size:12px;
+        line-height:1.25;
+        color:#666;
+        font-style:italic;
+    }
 
     #sidebar{
         position:fixed !important;
@@ -434,10 +441,13 @@ button.active {
 
     <h1>Historical East Asian Trade Network</h1>
 
-    <div id="subtitle">
-        East Asian Tributary System<br>
-        Trade Networks during the Early Joseon Dynasty (1392–1450)
+   <div id="subtitle">
+    East Asian Tributary System<br>
+    Trade Networks during the Early Joseon Dynasty (1392–1450)
+    <div class="mobile-hint">
+        Tap a trade route line to view details.
     </div>
+</div>
 
     <div class="section-title">Period</div>
 
@@ -763,36 +773,44 @@ function drawMap(){
         }
 
 const isMobileLine = window.innerWidth <= 768;
-const weight = isMobileLine
+
+const visibleWeight = isMobileLine
     ? 2.5 + (Number(d.records) / maxRecords) * 8
     : 1.5 + (Number(d.records) / maxRecords) * 12;
-        
-L.polyline([start,end],{
 
-    color: color,
-    weight: weight,
-    opacity:0.68,
-    lineCap: "round"
+const hitWeight = isMobileLine
+    ? visibleWeight * 3
+    : visibleWeight;
 
-})
-
-.bindTooltip(
-
+const tooltipHtml =
 `<b>${labels["朝鮮"]} ↔ ${labels[d.partner]}</b><br>
 Period: ${periodLabel(currentPeriod)}<br>
 Network: ${label}<br>
 Trade records: ${Number(d.records).toLocaleString()}<br>
 Items:
-<span class="item-list">${d.items}</span>`,
+<span class="item-list">${d.items}</span>`;
 
-{
+/* 실제로 보이는 선 */
+L.polyline([start,end],{
+    color: color,
+    weight: visibleWeight,
+    opacity: 0.68,
+    lineCap: "round"
+}).addTo(layerGroup);
+
+/* 모바일 터치 인식용 투명 선 */
+L.polyline([start,end],{
+    color: color,
+    weight: hitWeight,
+    opacity: 0,
+    lineCap: "round"
+})
+.bindTooltip(tooltipHtml,{
     sticky: true,
     className: "edge-tooltip"
-}
-
-)
-
-        .addTo(layerGroup);
+})
+.bindPopup(tooltipHtml)
+.addTo(layerGroup);
 
     });
 
