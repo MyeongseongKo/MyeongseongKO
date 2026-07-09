@@ -34,6 +34,10 @@ body {
     line-height: 1.2;
 }
 
+#mobile-back-link{
+    display:none;
+}
+
 #subtitle {
     font-size: 14px;
     color: #333;
@@ -263,6 +267,26 @@ button.active {
         background:#d8edf8;
     }
 
+#mobile-back-link{
+    position:fixed;
+    top:14px;
+    left:18px;
+
+    z-index:3000;
+
+    display:block;
+
+    font-size:15px;
+    font-weight:600;
+
+    color:#2f80ed;
+    text-decoration:none;
+}
+
+.desktop-back{
+    display:none !important;
+}
+    
     /* ---------- Floating Panel ---------- */
 
     #sidebar::before{
@@ -439,6 +463,8 @@ button.active {
 
 <div id="sidebar">
 
+    <a id="mobile-back-link" href="research.html">← Research</a>
+
     <h1>Historical East Asian Trade Network</h1>
 
    <div id="subtitle">
@@ -484,7 +510,7 @@ button.active {
         LLM-assisted classification in future updates.
     </div>
 
-    <p class="note">
+    <p class="note desktop-back">
         <a href="research.html">← Back to Research</a>
     </p>
 
