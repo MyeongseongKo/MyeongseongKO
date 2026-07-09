@@ -193,6 +193,7 @@ button.active {
         height: 100dvh !important;
         overflow: hidden !important;
         background: #d8edf8;
+        position: relative;
     }
 
     #sidebar {
@@ -200,15 +201,17 @@ button.active {
         top: 0;
         left: 0;
         right: 0;
-        height: 210px !important;
-        width: 100% !important;
 
-        padding: 70px 16px 12px 16px !important;
+        width: 100% !important;
+        height: 205px !important;
+
+        padding: 64px 17px 0 17px !important;
         box-sizing: border-box;
 
         background: rgba(255,255,255,0.98) !important;
         border: none !important;
         border-bottom: 1px solid #ddd !important;
+
         z-index: 1000;
     }
 
@@ -216,12 +219,14 @@ button.active {
         margin: 0 !important;
         font-size: 20px !important;
         line-height: 1.15 !important;
+        font-weight: 700 !important;
     }
 
     #subtitle {
-        margin: 8px 0 0 0 !important;
+        margin: 9px 0 0 0 !important;
         font-size: 16px !important;
         line-height: 1.18 !important;
+        color: #333 !important;
     }
 
     .section-title,
@@ -232,10 +237,11 @@ button.active {
 
     #main {
         position: fixed !important;
-        top: 210px !important;
+        top: 205px !important;
         left: 0;
         right: 0;
-        bottom: 180px !important;
+        bottom: 178px !important;
+
         background: #d8edf8;
         z-index: 1;
     }
@@ -246,35 +252,54 @@ button.active {
         background: #d8edf8;
     }
 
+    #sidebar::before {
+        content: "";
+        position: fixed;
+        left: 8px;
+        right: 8px;
+        bottom: 86px;
+        height: 126px;
+
+        background: rgba(255,255,255,0.88);
+        border-radius: 14px;
+        box-shadow: 0 -2px 14px rgba(0,0,0,0.08);
+
+        z-index: 1001;
+    }
+
     #sidebar::after {
         content: "Period";
         position: fixed;
         left: 18px;
-        bottom: 113px;
-        font-size: 15px;
-        font-weight: 700;
-        z-index: 1002;
-    }
+        bottom: 157px;
 
-    #sidebar::before {
-        content: "Network";
-        position: fixed;
-        left: 18px;
-        bottom: 43px;
+        width: 70px;
+        height: 44px;
+
+        display: flex;
+        align-items: center;
+
         font-size: 15px;
         font-weight: 700;
+        color: black;
+
         z-index: 1002;
     }
 
     #p1, #p2, #p3,
     #v1, #v2, #v3 {
         position: fixed !important;
-        width: calc((100vw - 118px) / 3) !important;
+
+        width: calc((100vw - 122px) / 3) !important;
         height: 54px !important;
 
         margin: 0 !important;
         padding: 6px 4px !important;
         box-sizing: border-box !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
 
         font-size: 12px !important;
         line-height: 1.08 !important;
@@ -283,32 +308,63 @@ button.active {
 
         border-radius: 10px !important;
         border: 1px solid rgba(0,0,0,0.25) !important;
+
         background: rgba(255,255,255,0.96) !important;
         color: #2f80ed !important;
 
-        z-index: 1002;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+        box-shadow: none !important;
         transform: none !important;
+
+        z-index: 1002;
     }
 
-    #p1, #v1 {
-        left: 92px !important;
+    #p1 {
+        left: 95px !important;
+        bottom: 151px !important;
     }
 
-    #p2, #v2 {
-        left: calc(92px + ((100vw - 118px) / 3) + 8px) !important;
+    #p2 {
+        left: calc(95px + ((100vw - 122px) / 3) + 8px) !important;
+        bottom: 151px !important;
     }
 
-    #p3, #v3 {
-        right: 14px !important;
+    #p3 {
+        right: 13px !important;
+        bottom: 151px !important;
     }
 
-    #p1, #p2, #p3 {
-        bottom: 92px !important;
+    #v1 {
+        left: 95px !important;
+        bottom: 93px !important;
     }
 
-    #v1, #v2, #v3 {
-        bottom: 22px !important;
+    #v2 {
+        left: calc(95px + ((100vw - 122px) / 3) + 8px) !important;
+        bottom: 93px !important;
+    }
+
+    #v3 {
+        right: 13px !important;
+        bottom: 93px !important;
+    }
+
+    #v1::before {
+        content: "Network";
+        position: fixed;
+        left: 18px;
+        bottom: 99px;
+
+        width: 70px;
+        height: 44px;
+
+        display: flex;
+        align-items: center;
+
+        color: black;
+        font-size: 15px;
+        font-weight: 700;
+
+        z-index: 1002;
     }
 
     #p1.active, #p2.active, #p3.active,
@@ -528,11 +584,11 @@ const isMobile = window.innerWidth <= 768;
 
 if (isMobile) {
     map.fitBounds([
-        [28.5, 116.8],
-        [44.5, 141.5]
+        [25.0, 116.0],
+        [45.8, 143.5]
     ], {
-        paddingTopLeft: [0, 20],
-        paddingBottomRight: [0, 90]
+        paddingTopLeft: [0, 0],
+        paddingBottomRight: [0, 20]
     });
 } else {
     map.fitBounds([
