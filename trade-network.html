@@ -805,12 +805,26 @@ L.polyline([start,end],{
     opacity: 0,
     lineCap: "round"
 })
-.bindTooltip(tooltipHtml,{
-    sticky: true,
-    className: "edge-tooltip"
-})
-.bindPopup(tooltipHtml)
-.addTo(layerGroup);
+const hitLine = L.polyline([start,end],{
+    color: color,
+    weight: hitWeight,
+    opacity: 0,
+    lineCap: "round"
+});
+
+if (isMobileLine) {
+    hitLine.bindPopup(tooltipHtml, {
+        className: "edge-tooltip",
+        maxWidth: 260
+    });
+} else {
+    hitLine.bindTooltip(tooltipHtml, {
+        sticky: true,
+        className: "edge-tooltip"
+    });
+}
+
+hitLine.addTo(layerGroup);
 
     });
 
