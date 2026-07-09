@@ -885,11 +885,11 @@ function drawMap(){
 
 const isMobileLine = window.innerWidth <= 768;
 
-const ratio = Math.sqrt(Number(d.records) / maxRecords);
+const ratio = Number(d.records) / maxRecords;
 
 const visibleWeight = isMobileLine
-    ? 1.5 + ratio * 12
-    : 1.5 + (Number(d.records) / maxRecords) * 12;
+    ? 1 + ratio * 16
+    : 1.5 + ratio * 12;
         
 const hitWeight = isMobileLine
     ? Math.max(visibleWeight * 5, 18)
