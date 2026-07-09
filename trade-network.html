@@ -265,7 +265,7 @@ button.active {
         background:#d8edf8;
     }
 
-        .mobile-hint{
+    .mobile-hint{
         display:block !important;
         margin-top:6px;
         font-size:12px;
@@ -307,9 +307,11 @@ button.active {
         color:#333;
     }
 
+    /* PC 범례와 노트 숨김 */
     .section-title,
     .note,
-    #legend{
+    #legend,
+    #lineLegend{
         display:none !important;
     }
 
@@ -332,26 +334,26 @@ button.active {
         background:#d8edf8;
     }
 
-#mobile-back-link{
-    position:fixed;
-    top:14px;
-    left:18px;
+    #mobile-back-link{
+        position:fixed;
+        top:14px;
+        left:18px;
 
-    z-index:3000;
+        z-index:3000;
 
-    display:block;
+        display:block;
 
-    font-size:15px;
-    font-weight:600;
+        font-size:15px;
+        font-weight:600;
 
-    color:#2f80ed;
-    text-decoration:none;
-}
+        color:#2f80ed;
+        text-decoration:none;
+    }
 
-.desktop-back{
-    display:none !important;
-}
-    
+    .desktop-back{
+        display:none !important;
+    }
+
     /* ---------- Floating Panel ---------- */
 
     #sidebar::before{
