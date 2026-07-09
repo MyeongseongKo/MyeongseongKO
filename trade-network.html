@@ -779,8 +779,8 @@ const visibleWeight = isMobileLine
     : 1.5 + (Number(d.records) / maxRecords) * 12;
 
 const hitWeight = isMobileLine
-    ? visibleWeight * 3
-    : visibleWeight;
+    ? Math.max(visibleWeight * 5, 18)
+    : Math.max(visibleWeight * 3, 10);
 
 const tooltipHtml =
 `<b>${labels["朝鮮"]} ↔ ${labels[d.partner]}</b><br>
